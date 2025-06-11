@@ -1,0 +1,63 @@
+# Laravel build directories
+/vendor
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/logs
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/views
+/storage/debugbar
+
+# Test & dev
+/tests
+/.phpunit.result.cache
+/.phpunit.cache
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+
+# Local environment
+.env
+.env.backup
+.env.production
+.env.testing
+auth.json
+
+# IDEs and editors
+/.idea
+/.vscode
+/.fleet
+
+# npm/yarn logs
+npm-debug.log
+yarn-error.log
+
+# Composer artifacts
+composer.lock
+
+# Deployment tools or temp
+*.zip
+*.tar.gz
+*.tgz
+*.log
+*.bak
+*.old
+*.swp
+*.swo
+*.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitattributes
+.gitignore
+.gitattributes
+
+# Docker & CI/CD (optional)
+docker-compose.*
+Dockerfile
+*.yml
+*.yaml
