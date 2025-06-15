@@ -14,12 +14,15 @@ return [
     |
     */
 
-    'postmark' => [
-        'token' => env('POSTMARK_TOKEN'),
+    'mailgun' => [
+        'domain' => env('MAILGUN_DOMAIN'),
+        'secret' => env('MAILGUN_SECRET'),
+        'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
+        'scheme' => 'https',
     ],
 
-    'resend' => [
-        'key' => env('RESEND_KEY'),
+    'postmark' => [
+        'token' => env('POSTMARK_TOKEN'),
     ],
 
     'ses' => [
@@ -28,11 +31,15 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'slack' => [
-        'notifications' => [
-            'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
-            'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
-        ],
+    'mailchimp' => [
+        'key' => env('MAILCHIMP_APIKEY'),
+        'server_prefix' => env('MAILCHIMP_SERVER_PREFIX'),
+        'list_id' => env('MAILCHIMP_LIST_ID'),
+    ],
+
+    'kpay' => [
+        'secret_key' => env('KPAY_SECRET_KEY'),
+        'retailer_id' => env('KPAY_RETAILER_ID', '02'),
     ],
 
 ];

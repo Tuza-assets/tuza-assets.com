@@ -1,0 +1,238 @@
+[15-Jun-2024 13:40:49 UTC] PHP Fatal error:  Cannot declare class App\Http\Controllers\BlogsController, because the name is already in use in /home/afrino3/tuzaweb.afrinnovators.co.rw/app/Http/Controllers/BlogController.php on line 8
+[15-Jun-2024 13:42:54 UTC] PHP Fatal error:  Cannot declare class App\Http\Controllers\BlogsController, because the name is already in use in /home/afrino3/tuzaweb.afrinnovators.co.rw/app/Http/Controllers/BlogController.php on line 8
+[15-Jun-2024 13:45:48 UTC] PHP Fatal error:  Cannot declare class App\Http\Controllers\BlogsController, because the name is already in use in /home/afrino3/tuzaweb.afrinnovators.co.rw/app/Http/Controllers/BlogController.php on line 8
+[20-Jun-2024 05:54:43 UTC] PHP Fatal error:  Cannot declare class CreatePropertyOnSellTable, because the name is already in use in /home/afrino3/tuzaweb.afrinnovators.co.rw/database/migrations/2024_06_20_050822_create_property_on_sells_table.php on line 7
+[20-Jun-2024 05:55:26 UTC] PHP Fatal error:  Cannot declare class CreatePropertyOnSellTable, because the name is already in use in /home/afrino3/tuzaweb.afrinnovators.co.rw/database/migrations/2024_06_20_050822_create_property_on_sells_table.php on line 7
+[20-Jun-2024 05:59:28 UTC] PHP Fatal error:  Cannot declare class CreatePropertyOnSellTable, because the name is already in use in /home/afrino3/tuzaweb.afrinnovators.co.rw/database/migrations/2024_06_20_050822_create_property_on_sells_table_v2.php on line 7
+[20-Jun-2024 06:00:15 UTC] PHP Fatal error:  Cannot declare class CreatePropertyOnSellTable, because the name is already in use in /home/afrino3/tuzaweb.afrinnovators.co.rw/database/migrations/2024_06_20_050822_create_property_on_sells_table_v2.php on line 7
+[20-Jun-2024 06:04:40 UTC] PHP Fatal error:  Cannot declare class CreatePropertyOnSellTableV2, because the name is already in use in /home/afrino3/tuzaweb.afrinnovators.co.rw/database/migrations/2024_06_20_050822_create_property_on_sells_table_v2.php on line 7
+[15-Jul-2024 22:40:31 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\Admin\MagazineController::destroy() in /home/tuzaasse/public_html/app/Http/Controllers/Admin/MagazineController.php on line 108
+[16-Jul-2024 14:23:54 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[16-Jul-2024 14:23:58 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[16-Jul-2024 14:24:37 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[23-Jul-2024 08:37:00 UTC] PHP Fatal error:  Cannot declare class RenameZoningToZoningIdInPropertyOnSellsTable, because the name is already in use in /home/tuzaasse/public_html/database/migrations/2024_07_23_075916_modify_zoning_column_type_in_property_on_sells_table.php on line 6
+[23-Jul-2024 08:39:25 UTC] PHP Fatal error:  Cannot declare class RenameZoningToZoningIdInPropertyOnSells, because the name is already in use in /home/tuzaasse/public_html/database/migrations/2024_07_23_075916_modify_zoning_column_type_in_property_on_sells_table.php on line 6
+[23-Jul-2024 08:39:52 UTC] PHP Fatal error:  Cannot declare class RenameZoningToZoningIdInPropertyOnSells, because the name is already in use in /home/tuzaasse/public_html/database/migrations/2024_07_23_075916_modify_zoning_column_type_in_property_on_sells_table.php on line 6
+[23-Jul-2024 08:43:26 UTC] PHP Fatal error:  Cannot declare class RenameZoningToZoningIdInPropertyOnSells, because the name is already in use in /home/tuzaasse/public_html/database/migrations/2024_07_23_075916_modify_zoning_column_type_in_property_on_sells_table.php on line 6
+[23-Jul-2024 08:51:50 UTC] PHP Fatal error:  Cannot declare class RenameZoningToZoningIdInPropertyOnSells, because the name is already in use in /home/tuzaasse/public_html/database/migrations/2024_07_23_075916_modify_zoning_column_type_in_property_on_sells_table.php on line 6
+[23-Jul-2024 08:52:34 UTC] PHP Fatal error:  Cannot declare class ChangeZoningIdColumnTypeInPropertyOnSellsTable, because the name is already in use in /home/tuzaasse/public_html/database/migrations/2024_07_23_075916_modify_zoning_column_type_in_property_on_sells_table.php on line 6
+[15-Aug-2024 01:03:15 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/tuzaasse/public_html/bootstrap/app.php:14
+Stack trace:
+#0 /home/tuzaasse/public_html/public/index.php(46): require_once()
+#1 /home/tuzaasse/public_html/index.php(21): require_once('/home/tuzaasse/...')
+#2 {main}
+  thrown in /home/tuzaasse/public_html/bootstrap/app.php on line 14
+[15-Aug-2024 01:03:17 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/tuzaasse/public_html/bootstrap/app.php:14
+Stack trace:
+#0 /home/tuzaasse/public_html/public/index.php(46): require_once()
+#1 /home/tuzaasse/public_html/index.php(21): require_once('/home/tuzaasse/...')
+#2 {main}
+  thrown in /home/tuzaasse/public_html/bootstrap/app.php on line 14
+[15-Aug-2024 01:03:17 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/tuzaasse/public_html/bootstrap/app.php:14
+Stack trace:
+#0 /home/tuzaasse/public_html/public/index.php(46): require_once()
+#1 /home/tuzaasse/public_html/index.php(21): require_once('/home/tuzaasse/...')
+#2 {main}
+  thrown in /home/tuzaasse/public_html/bootstrap/app.php on line 14
+[15-Aug-2024 01:03:19 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/tuzaasse/public_html/bootstrap/app.php:14
+Stack trace:
+#0 /home/tuzaasse/public_html/public/index.php(46): require_once()
+#1 /home/tuzaasse/public_html/index.php(21): require_once('/home/tuzaasse/...')
+#2 {main}
+  thrown in /home/tuzaasse/public_html/bootstrap/app.php on line 14
+[15-Aug-2024 01:05:12 UTC] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/tuzaasse/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:352
+Stack trace:
+#0 /home/tuzaasse/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#1 /home/tuzaasse/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(744): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/tuzaasse/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(719): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/tuzaasse/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(650): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#4 /home/tuzaasse/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(556): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#5 /home/tuzaasse/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(473): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Error))
+#6 /home/tuzaasse/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(509): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Error))
+#7 /home/tuzaasse/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(148): Illuminate\Foundation\Http\Kernel->renderException(Object(Illuminate\Http\Request), Object(Error))
+#8 /home/tuzaasse/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#9 /home/tuzaasse/public_html/index.php(21): require_once('/home/tuzaasse/...')
+#10 {main}
+  thrown in /home/tuzaasse/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 352
+[15-Aug-2024 01:20:33 UTC] PHP Warning:  require(/home/tuzaasse/public_html/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/tuzaasse/public_html/public/index.php on line 34
+[15-Aug-2024 01:20:33 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tuzaasse/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/tuzaasse/public_html/public/index.php:34
+Stack trace:
+#0 /home/tuzaasse/public_html/index.php(21): require_once()
+#1 {main}
+  thrown in /home/tuzaasse/public_html/public/index.php on line 34
+[15-Aug-2024 01:20:36 UTC] PHP Warning:  require(/home/tuzaasse/public_html/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/tuzaasse/public_html/public/index.php on line 34
+[15-Aug-2024 01:20:36 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tuzaasse/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/tuzaasse/public_html/public/index.php:34
+Stack trace:
+#0 /home/tuzaasse/public_html/index.php(21): require_once()
+#1 {main}
+  thrown in /home/tuzaasse/public_html/public/index.php on line 34
+[15-Aug-2024 01:20:38 UTC] PHP Warning:  require(/home/tuzaasse/public_html/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/tuzaasse/public_html/public/index.php on line 34
+[15-Aug-2024 01:20:38 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tuzaasse/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/tuzaasse/public_html/public/index.php:34
+Stack trace:
+#0 /home/tuzaasse/public_html/index.php(21): require_once()
+#1 {main}
+  thrown in /home/tuzaasse/public_html/public/index.php on line 34
+[15-Aug-2024 01:20:41 UTC] PHP Warning:  require(/home/tuzaasse/public_html/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/tuzaasse/public_html/public/index.php on line 34
+[15-Aug-2024 01:20:41 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tuzaasse/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/tuzaasse/public_html/public/index.php:34
+Stack trace:
+#0 /home/tuzaasse/public_html/index.php(21): require_once()
+#1 {main}
+  thrown in /home/tuzaasse/public_html/public/index.php on line 34
+[15-Aug-2024 01:20:42 UTC] PHP Warning:  require(/home/tuzaasse/public_html/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/tuzaasse/public_html/public/index.php on line 34
+[15-Aug-2024 01:20:42 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tuzaasse/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/tuzaasse/public_html/public/index.php:34
+Stack trace:
+#0 /home/tuzaasse/public_html/index.php(21): require_once()
+#1 {main}
+  thrown in /home/tuzaasse/public_html/public/index.php on line 34
+[15-Aug-2024 01:21:00 UTC] PHP Warning:  require(/home/tuzaasse/public_html/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/tuzaasse/public_html/public/index.php on line 34
+[15-Aug-2024 01:21:00 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tuzaasse/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/tuzaasse/public_html/public/index.php:34
+Stack trace:
+#0 /home/tuzaasse/public_html/index.php(21): require_once()
+#1 {main}
+  thrown in /home/tuzaasse/public_html/public/index.php on line 34
+[18-Aug-2024 09:02:22 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /home/tuzaasse/public_html/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 154
+[27-Jan-2025 07:03:08 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.31. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[29-Mar-2025 09:12:44 UTC] PHP Fatal error:  Cannot declare class App\Http\Controllers\Payments\PayPalController, because the name is already in use in /home/tuzaasse/public_html/app/Http/Controllers/PayPalController.php on line 14
+[29-Mar-2025 09:12:53 UTC] PHP Fatal error:  Cannot declare class App\Http\Controllers\Payments\PayPalController, because the name is already in use in /home/tuzaasse/public_html/app/Http/Controllers/PayPalController.php on line 14
+[08-Apr-2025 21:51:51 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 21:51:51 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:01:01 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:04:09 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:08:46 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:12:45 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:15:01 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:24:14 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:24:23 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:27:18 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:31:36 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:32:59 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:39:17 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:40:25 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:43:17 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:44:10 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 22:46:14 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 23:09:44 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 23:09:57 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[08-Apr-2025 23:34:04 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 00:35:37 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 00:35:42 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 01:09:39 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 01:23:33 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 01:26:11 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 01:36:23 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 01:57:59 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 02:11:20 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 02:19:30 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 02:36:45 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 03:40:43 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 03:55:55 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 05:22:55 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 06:19:12 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 06:22:41 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 06:40:48 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:15:33 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:28:40 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:28:54 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:29:01 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:30:18 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:30:20 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:30:25 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:30:31 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:30:33 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:30:35 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:30:36 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:30:41 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:31:28 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:31:39 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:31:53 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:32:08 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:32:10 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:35:55 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:35:57 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:35:59 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:38:52 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:41:49 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.32. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:41:55 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.32. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[09-Apr-2025 07:42:03 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.32. in /home/tuzaasse/public_html/vendor/composer/platform_check.php on line 28
+[18-Apr-2025 20:04:27 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:05 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:05 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:05 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:05 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:06 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:06 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:06 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:06 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:06 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:06 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:06 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:07 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:07 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:07 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:07 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:07 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:07 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:07 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:07 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:08 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:08 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:08 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:08 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:08 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:08 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:09 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:09 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:09 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:09 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:09 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:09 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:09 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:10 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:10 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:10 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:10 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:10 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:10 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:10 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:15 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:15 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:15 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:20 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-Apr-2025 20:18:20 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[21-Apr-2025 16:50:48 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[22-Apr-2025 00:50:49 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[27-Apr-2025 14:28:59 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[01-May-2025 06:56:13 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[01-May-2025 14:38:56 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[01-May-2025 19:00:45 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[02-May-2025 08:01:42 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[02-May-2025 08:01:43 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[02-May-2025 08:01:43 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[02-May-2025 08:01:48 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[02-May-2025 08:01:57 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[02-May-2025 08:02:02 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[02-May-2025 08:02:18 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[03-May-2025 07:50:21 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[03-May-2025 10:56:45 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[03-May-2025 10:56:46 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[03-May-2025 10:56:47 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[03-May-2025 10:56:49 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[03-May-2025 10:56:57 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[03-May-2025 10:56:59 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[03-May-2025 10:57:13 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[03-May-2025 19:49:44 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[03-May-2025 19:49:55 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[04-May-2025 02:14:22 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[04-May-2025 02:29:08 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[04-May-2025 06:08:23 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[04-May-2025 06:08:23 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[04-May-2025 06:08:23 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[04-May-2025 06:08:25 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[04-May-2025 06:08:32 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[04-May-2025 06:08:34 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[04-May-2025 06:08:45 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[04-May-2025 21:48:41 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[05-May-2025 06:22:27 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[13-May-2025 01:51:42 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[19-May-2025 17:15:31 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10
+[21-May-2025 09:00:53 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/tuzaasse/public_html/index.php on line 10

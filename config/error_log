@@ -1,0 +1,4 @@
+[16-Feb-2025 16:02:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/tuzaasse/public_html/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/tuzaasse/public_html/config/database.php on line 18

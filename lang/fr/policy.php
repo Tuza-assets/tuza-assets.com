@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'last_updated' => 'Mise à jour la plus récente : 25 juillet 2023',
+    'intro' => 'Tuza Assets (« nous », « notre », ou « nos ») exploite le site Web <a href="https://www.tuzaassets.com">https://www.tuzaassets.com</a> (le « Site ») et fournit des services de gestion immobilière au Rwanda. La présente Politique de confidentialité explique comment nous recueillons, utilisons, divulguons et protégeons vos informations personnelles lorsque vous visitez notre site Web ou utilisez nos services. Nous nous engageons à protéger votre vie privée et à assurer la sécurité de vos données personnelles.',
+    'info_we_collect' => [
+        'personal_information' => '<b>Informations personnelles :</b> Lorsque vous utilisez nos services ou interagissez avec notre site Web, nous pouvons recueillir des informations personnelles telles que votre nom, adresse, adresse e-mail, numéro de téléphone et d’autres détails pertinents.',
+        'financial_information' => '<b>Informations financières :</b> En cas de transactions, nous pouvons collecter des informations liées au paiement, telles que les détails de carte de crédit, à des fins de facturation.',
+        'usage_data' => '<b>Données d’utilisation :</b> Nous pouvons recueillir des informations sur la manière dont vous utilisez et accédez à notre site Web. Cela inclut les adresses IP, les types de navigateurs, les informations sur les appareils et autres données techniques.',
+    ],
+    'how_we_use' => [
+        'provide_services' => '<b>Fournir des services :</b> Nous utilisons les informations collectées pour offrir nos services de gestion immobilière, traiter les transactions et répondre à vos demandes.',
+        'communication' => '<b>Communication :</b> Nous pouvons utiliser vos coordonnées pour vous envoyer des mises à jour importantes, des bulletins d’information, du matériel marketing ou d’autres informations pertinentes.',
+        'website_improvement' => '<b>Amélioration du site Web :</b> Vos données d’utilisation nous aident à comprendre comment notre site Web est consulté et utilisé, ce qui nous permet d’améliorer l’expérience utilisateur et nos services.',
+        'compliance' => '<b>Conformité :</b> Nous pouvons utiliser vos informations pour respecter les obligations légales, faire respecter nos politiques ou répondre à des demandes légales.',
+    ],
+    'data_protection' => 'Nous accordons la priorité à la sécurité de vos données personnelles et prenons des mesures appropriées pour les protéger contre tout accès, modification ou divulgation non autorisé. Notre site Web utilise un cryptage sécurisé de la couche de socket (SSL) pour protéger les données sensibles lors de la transmission.',
+    'data_sharing' => 'Nous ne vendons, n’échangeons, ni ne louons vos informations personnelles à des tiers sans votre consentement explicite. Cependant, nous pouvons partager vos données avec des prestataires de services de confiance, des sous-traitants ou des partenaires commerciaux qui nous aident à fournir nos services. Nous veillons à ce que ces tiers respectent des normes strictes en matière de confidentialité et de sécurité.',
+    'cookies' => 'Notre site Web peut utiliser des cookies et des technologies de suivi pour améliorer votre expérience de navigation. Les cookies sont de petits fichiers de données stockés sur votre appareil qui nous permettent de reconnaître votre navigateur et de capturer certaines informations. Vous pouvez modifier les paramètres de votre navigateur pour gérer ou désactiver les cookies, mais cela peut affecter la fonctionnalité du site Web.',
+    'third_party_links' => 'Notre site Web peut contenir des liens vers des sites Web de tiers. Veuillez noter que nous ne sommes pas responsables des pratiques de confidentialité de ces sites externes. Nous vous recommandons de consulter leurs politiques de confidentialité séparément.',
+    'children_privacy' => 'Nos services ne sont pas destinés aux personnes de moins de 18 ans. Nous ne recueillons pas sciemment d’informations personnelles auprès des mineurs. Si nous découvrons que nous avons involontairement collecté des données auprès d’un mineur, nous les supprimerons rapidement de nos dossiers.',
+    'privacy_rights' => 'Vous avez le droit d’accéder à vos informations personnelles, de les mettre à jour ou de demander leur suppression. Si vous souhaitez exercer ces droits ou avez des préoccupations liées à la confidentialité, veuillez nous contacter en utilisant les coordonnées fournies.',
+    'policy_changes' => 'Nous nous réservons le droit de mettre à jour et de modifier cette politique de confidentialité périodiquement. La dernière version sera affichée sur notre site Web, et la date de la dernière mise à jour indiquera les changements.',
+    'conclusion' => 'En utilisant nos services ou en accédant à notre site Web, vous consentez à la collecte et à l’utilisation de vos informations personnelles telles que décrites dans cette politique de confidentialité. Si vous n’êtes pas d’accord avec l’une des modalités, veuillez vous abstenir d’utiliser nos services ou de fournir vos informations personnelles.',
+    'contact' => 'Si vous avez des questions ou avez besoin de plus d’informations concernant cette politique de confidentialité, veuillez nous contacter à l’adresse <a href="mailto:info@tuza-assets.com">info@tuza-assets.com</a>. Merci de faire confiance à Tuza Assets pour votre vie privée.',
+    'thanks'=>"Merci de faire confiance à Tuza Assets Ltd",
+];
