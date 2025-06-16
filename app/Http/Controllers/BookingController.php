@@ -31,7 +31,6 @@ class BookingController extends Controller
         Mail::to('tuzaassets@gmail.com')->send(new BookingConfirmation($data));
         Mail::to($data['email'])->send(new CustomerConfirmation($data));
 
-
         return redirect()->back()->with('success', 'Your booking request has been sent successfully!');
     }
 }
