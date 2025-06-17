@@ -42,7 +42,7 @@ jobs:
       - name: Setup composer
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: '8.1'
           tools: composer:2
 
       - name: Run composer install
@@ -78,7 +78,7 @@ jobs:
         with:
           api-key: ${{ secrets.IONOS_API_KEY }}
           service-host: api-eu.ionos.space
-          project-id: 669e1dc1-a08e-4723-88b6-99e8ebe5ae39
+          project-id: adf5804c-d5da-40f8-badd-cb5359c3fc6d
           branch-id: ${{ inputs.branch-id }}
           version: ${{ github.sha }}
           folder: ${{ env.DEPLOYMENT_FOLDER }}
