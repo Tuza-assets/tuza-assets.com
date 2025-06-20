@@ -128,5 +128,4 @@
         </swiper-container>
     </section>
 @else
-    <p>No properties available at this time.</p>
 @endif
