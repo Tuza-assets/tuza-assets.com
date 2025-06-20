@@ -106,13 +106,15 @@ Route::get('login/sell', [LoginController::class, 'sell_index'])->name('admin.lo
 
 Route::post('/favority/{productId}', [PropertyOnSellController::class, 'favorite'])->name('properties.favority');
 
+Route::get('/', [LeadController::class, 'index'])->name('welcome');
+
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
     ],
     function () {
-        Route::get('/', [LeadController::class, 'index'])->name('welcome');
+
 
         Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
             Route::get('/dashboard', [AuthController::class, 'index'])->name('dashboard');
