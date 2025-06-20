@@ -106,19 +106,12 @@ Route::get('login/sell', [LoginController::class, 'sell_index'])->name('admin.lo
 
 Route::post('/favority/{productId}', [PropertyOnSellController::class, 'favorite'])->name('properties.favority');
 
-Route::get('/', [LeadController::class, 'index'])->name('welcome');
-Route::get('/about-us', function () {
-    return view('about');
-})->name('about');
-
-
 Route::group(
     [
-        'prefix' => LaravelLocalization::setLocale(),
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
     ],
     function () {
-
+        Route::get('/', [LeadController::class, 'index'])->name('welcome');
 
         Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
             Route::get('/dashboard', [AuthController::class, 'index'])->name('dashboard');
@@ -220,13 +213,9 @@ Route::group(
             return view('zoning');
         })->name('Zoning2');
 
-
-
-
-
-
-
-
+        Route::get('/about-us', function () {
+            return view('about');
+        })->name('about');
 
         Route::get('/Bestkeptsecret', function () {
             return view('bestkeptsecret.index');
