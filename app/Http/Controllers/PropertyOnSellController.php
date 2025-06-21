@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PropertyOnSell;
 use App\Models\Favority;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 class PropertyOnSellController extends Controller
@@ -77,15 +77,21 @@ class PropertyOnSellController extends Controller
         $identity = "{$year}_{$serial}_{$random}";
         $validatedData['property_code'] = $identity;
 
+        // Ensure property_images directory exists in public folder
+        $publicPath = public_path('property_images');
+        if (!File::exists($publicPath)) {
+            File::makeDirectory($publicPath, 0755, true);
+        }
+
         // Handle main image
         if ($request->hasFile('mainimage')) {
             $image = $request->file('mainimage');
             $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
             $img = $this->applyWatermark($image);
 
-            // Convert image to string and store using Storage
-            $imageData = $img->encode('jpg', 90)->__toString();
-            Storage::disk('property_images')->put($newImageName, $imageData);
+            // Save image directly to public/property_images folder
+            $imagePath = $publicPath . '/' . $newImageName;
+            $img->save($imagePath, 90);
             $validatedData['mainimage'] = 'property_images/' . $newImageName;
         }
 
@@ -96,9 +102,9 @@ class PropertyOnSellController extends Controller
                 $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
                 $img = $this->applyWatermark($image);
 
-                // Convert image to string and store using Storage
-                $imageData = $img->encode('jpg', 90)->__toString();
-                Storage::disk('property_images')->put($newImageName, $imageData);
+                // Save image directly to public/property_images folder
+                $imagePath = $publicPath . '/' . $newImageName;
+                $img->save($imagePath, 90);
                 $imagePaths[] = 'property_images/' . $newImageName;
             }
             $validatedData['images'] = json_encode($imagePaths);
@@ -157,23 +163,32 @@ class PropertyOnSellController extends Controller
             'storage' => 'nullable|integer',
             'construction_type' => 'nullable|string|in:Resale,Newly built',
             'year_of_construction' => 'nullable|integer|min:1900|max:' . date('Y'),
-            'mainimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Fixed typo
+            'mainimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        // Ensure property_images directory exists in public folder
+        $publicPath = public_path('property_images');
+        if (!File::exists($publicPath)) {
+            File::makeDirectory($publicPath, 0755, true);
+        }
 
         // Handle main image
         if ($request->hasFile('mainimage')) {
             // Delete old main image if exists
-            if ($property->mainimage && Storage::disk('property_images')->exists(basename($property->mainimage))) {
-                Storage::disk('property_images')->delete(basename($property->mainimage));
+            if ($property->mainimage) {
+                $oldImagePath = public_path($property->mainimage);
+                if (File::exists($oldImagePath)) {
+                    File::delete($oldImagePath);
+                }
             }
 
             $image = $request->file('mainimage');
             $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
             $img = $this->applyWatermark($image);
 
-            // Convert image to string and store using Storage
-            $imageData = $img->encode('jpg', 90)->__toString();
-            Storage::disk('property_images')->put($newImageName, $imageData);
+            // Save image directly to public/property_images folder
+            $imagePath = $publicPath . '/' . $newImageName;
+            $img->save($imagePath, 90);
             $validatedData['mainimage'] = 'property_images/' . $newImageName;
         }
 
@@ -184,9 +199,9 @@ class PropertyOnSellController extends Controller
                 $oldImages = json_decode($property->images, true);
                 if (is_array($oldImages)) {
                     foreach ($oldImages as $oldImage) {
-                        $fileName = basename($oldImage);
-                        if (Storage::disk('property_images')->exists($fileName)) {
-                            Storage::disk('property_images')->delete($fileName);
+                        $oldImagePath = public_path($oldImage);
+                        if (File::exists($oldImagePath)) {
+                            File::delete($oldImagePath);
                         }
                     }
                 }
@@ -197,9 +212,9 @@ class PropertyOnSellController extends Controller
                 $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
                 $img = $this->applyWatermark($image);
 
-                // Convert image to string and store using Storage
-                $imageData = $img->encode('jpg', 90)->__toString();
-                Storage::disk('property_images')->put($newImageName, $imageData);
+                // Save image directly to public/property_images folder
+                $imagePath = $publicPath . '/' . $newImageName;
+                $img->save($imagePath, 90);
                 $imagePaths[] = 'property_images/' . $newImageName;
             }
             $validatedData['images'] = json_encode($imagePaths);
@@ -242,8 +257,11 @@ class PropertyOnSellController extends Controller
         $property = PropertyOnSell::findOrFail($id);
 
         // Delete main image if exists
-        if ($property->mainimage && Storage::disk('property_images')->exists(basename($property->mainimage))) {
-            Storage::disk('property_images')->delete(basename($property->mainimage));
+        if ($property->mainimage) {
+            $mainImagePath = public_path($property->mainimage);
+            if (File::exists($mainImagePath)) {
+                File::delete($mainImagePath);
+            }
         }
 
         // Delete additional images if they exist
@@ -251,9 +269,9 @@ class PropertyOnSellController extends Controller
             $images = json_decode($property->images, true);
             if (is_array($images)) {
                 foreach ($images as $image) {
-                    $fileName = basename($image);
-                    if (Storage::disk('property_images')->exists($fileName)) {
-                        Storage::disk('property_images')->delete($fileName);
+                    $imagePath = public_path($image);
+                    if (File::exists($imagePath)) {
+                        File::delete($imagePath);
                     }
                 }
             }
