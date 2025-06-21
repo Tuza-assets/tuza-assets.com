@@ -69,7 +69,7 @@ class LeadController extends Controller
                 $propertyResponse = Http::withOptions([
                     'verify' => false,
                     'timeout' => 30,
-                ])->get('https://property.tuza-assets.com/api/v1/properties');
+                ])->get('http://property.tuza-assets.com/api/v1/properties');
                 $properties = $propertyResponse->json();
 
                 // Fetch the plots on sell data from the API

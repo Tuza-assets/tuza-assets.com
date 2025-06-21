@@ -10,7 +10,7 @@ class PropertyController extends Controller
     public function index()
     {
         // Fetch data from the API
-        $response = Http::get('https://property.tuza-assets.com/api/v1/properties');
+        $response = Http::get('http://property.tuza-assets.com/api/v1/properties');
         $properties = $response->json();
 
         // Pass data to the view
@@ -31,7 +31,7 @@ class PropertyController extends Controller
     public function show($id)
     {
         // Fetch single property data from the API
-        $response = Http::get("https://property.tuza-assets.com/api/v1/properties/{$id}");
+        $response = Http::get("http://property.tuza-assets.com/api/v1/properties/{$id}");
         $property = $response->json();
 
         // Pass the property data to the view
