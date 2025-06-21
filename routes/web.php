@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\MailchimpController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\partener\PartnerPropertyController;
@@ -91,11 +92,12 @@ Route::get('payment/invoice/cancel', [PayPalController::class, 'cancelTransactio
 Route::get('payment/invoice/finish/success', [PayPalController::class, 'successTransaction'])->name('payment.successTransaction');
 
 // KPay routes
-Route::get('payment/kpay/{id}/process', [KPayController::class, 'processPayment'])->name('payment.kpay.process');
-Route::get('payment/kpay/check-status/{refid}', [KPayController::class, 'checkStatus'])->name('transaction.payment.checkStatus');
-Route::post('payment/kpay/callback', [KPayController::class, 'callbackHandler'])->name('transaction.payment.callback');
+// Route::get('payment/kpay/{id}/process', [KPayController::class, 'processPayment'])->name('payment.kpay.process');
+// Route::get('payment/kpay/check-status/{refid}', [KPayController::class, 'checkStatus'])->name('transaction.payment.checkStatus');
+// Route::post('payment/kpay/callback', [KPayController::class, 'callbackHandler'])->name('transaction.payment.callback');
 
-Route::post('payment/kpay/process/initiate', [KPayController::class, 'initiatePayment'])->name('payment.kpay.process.initiate');
+// Route::post('payment/kpay/process/initiate', [KPayController::class, 'initiatePayment'])->name('payment.kpay.process.initiate');
+
 Route::get('payment/kpay/coming-soon', function () {
     return view('payments.kpay.coming_soon');
 })->name('payment.kpay.coming.soon');
@@ -445,28 +447,28 @@ Route::get('api/property/{id}', function ($id) {
 
 Route::post('/schedule-visit', [VisitController::class, 'scheduleVisit'])->name('schedule.visit');
 
-Route::get('/properties', function () {
-    $priceMin = request('price_min', 0);
-    $priceMax = request('price_max', PHP_INT_MAX);
-    $floorAreaMin = request('floor_area_min', 0);
-    $floorAreaMax = request('floor_area_max', PHP_INT_MAX);
-    $plotAreaMin = request('plot_area_min', 0);
-    $plotAreaMax = request('plot_area_max', PHP_INT_MAX);
-    $roomsMin = request('rooms_min', 0);
-    $roomsMax = request('rooms_max', PHP_INT_MAX);
+// Route::get('/properties', function () {
+//     $priceMin = request('price_min', 0);
+//     $priceMax = request('price_max', PHP_INT_MAX);
+//     $floorAreaMin = request('floor_area_min', 0);
+//     $floorAreaMax = request('floor_area_max', PHP_INT_MAX);
+//     $plotAreaMin = request('plot_area_min', 0);
+//     $plotAreaMax = request('plot_area_max', PHP_INT_MAX);
+//     $roomsMin = request('rooms_min', 0);
+//     $roomsMax = request('rooms_max', PHP_INT_MAX);
 
-    $properties = \App\Models\Property::whereHas('available_units', function ($query) use ($priceMin, $priceMax, $roomsMin, $roomsMax) {
-        $query->whereBetween('rent', [$priceMin, $priceMax])->whereBetween('bedroom', [$roomsMin, $roomsMax]);
-    })
-        ->where('floor_area', '>=', $floorAreaMin)
-        ->where('floor_area', '<=', $floorAreaMax)
-        ->where('plot_area', '>=', $plotAreaMin)
-        ->where('plot_area', '<=', $plotAreaMax)
-        ->with('available_units', 'thumbnail')
-        ->get();
+//     $properties = \App\Models\Property::whereHas('available_units', function ($query) use ($priceMin, $priceMax, $roomsMin, $roomsMax) {
+//         $query->whereBetween('rent', [$priceMin, $priceMax])->whereBetween('bedroom', [$roomsMin, $roomsMax]);
+//     })
+//         ->where('floor_area', '>=', $floorAreaMin)
+//         ->where('floor_area', '<=', $floorAreaMax)
+//         ->where('plot_area', '>=', $plotAreaMin)
+//         ->where('plot_area', '<=', $plotAreaMax)
+//         ->with('available_units', 'thumbnail')
+//         ->get();
 
-    return response()->json($properties);
-});
+//     return response()->json($properties);
+// });
 
 Route::get('/property/on/sell', function () {
     $properties = PropertyOnSell::all();

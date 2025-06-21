@@ -72,7 +72,7 @@
         .aside-open {
             display: none; /* Hide on small screens */
         }
-    
+
         #filterSection{
         margin-top:7vh;
     }
@@ -96,10 +96,10 @@
             transform: translateX(0);
         }
     }
-    
-    
-    
-    
+
+
+
+
            .btn-custom-orange {
             color: black; /* Text color */
             background-color: darkorange; /* Button background color */
@@ -118,34 +118,34 @@
             box-shadow: none; /* No shadow on focus and active */
             text-decoration: none; /* Ensure no text decoration on focus and active */
         }
-    
+
            .btn-custom-green {
-            color: black; 
+            color: black;
             background-color: green;
             border-color: green;
             padding: 10px 20px;
-            text-decoration: none; 
+            text-decoration: none;
         }
         .btn-custom-green:hover {
-            color: white; 
-            background-color: green; 
-            border-color:green; 
-            box-shadow: none; 
-            text-decoration: none; 
+            color: white;
+            background-color: green;
+            border-color:green;
+            box-shadow: none;
+            text-decoration: none;
         }
         .btn-custom-green:focus, .btn-custom-green:active {
-            box-shadow: none; 
-            text-decoration: none; 
+            box-shadow: none;
+            text-decoration: none;
         }
         i {
             color: darkorange;
-            
+
         }
         span{
             margin-left: 7px !important;
         }
 
-    
+
 </style>
 
 
@@ -155,7 +155,7 @@
 <section class="bg-success text-white text-center py-5">
     <div class="container mb-2">
     </div>
-</section> 
+</section>
 @if(isset($properties))
 
   <div class="container mx-auto py-2 sm:px-2 md:px-4 lg:px-6 xl:px-8">
@@ -285,7 +285,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="form-row">
                 <div class="form-group col-12">
                     <label class="d-flex justify-content-between align-items-center">
@@ -409,7 +409,7 @@
                     </div>
                 </div>
             </div>
-                        
+
             <!-- Garage Type Section -->
             <div class="form-row">
                 <div class="form-group col-12">
@@ -439,7 +439,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Bedrooms Filter Section -->
             <div class="form-row">
                 <div class="form-group col-6">
@@ -502,7 +502,7 @@
          data-garage-type="{{ $property->garage_type }}"
           data-zoning="{{ $property->zoning_id }}">
 
-                
+
                 @php
                     // Determine the first image
                     $images = is_string($property->images) ? json_decode($property->images, true) : $property->images;
@@ -516,7 +516,7 @@
                     class="d-flex flex-column flex-md-row align-items-center bg-white shadow-sm hover:bg-light w-100 text-decoration-none"
                 >
                     <img
-                        src="{{ asset('public/' . $firstImage) }}"
+                        src="{{ asset($firstImage) }}"
                         alt="{{ $property->name }}"
                         class="img-fluid  mb-3 mb-md-0"
                         style="width: 230px; height: 150px; object-fit: cover;"
@@ -525,21 +525,21 @@
                         <h2 class="h5 font-weight-bold text-dark">{{ $property->name}}</h2>
                         <p class="text-muted mb-1">{{ $property->province }} {{ $property->district }}</p>
                         <p class="text-dark font-weight-bold property-price"> <span>Price:</span>
-                        
+
                         {{ Number::currency($property?->price ?? 0, in: $property->currency ?? 'RWF') }}
                         </p>
-                        
+
                          <span><i class="fa fa-book" aria-hidden="true"></i><span class="text-dark">availability: {{ $property->availability }}</span></span>
-                        
+
                         <div class="property-card-details">
                             @if($property->size)
                                 <span><i class="fas fa-ruler-combined"></i><span>Size:</span> {{ $property->size }} m²</span>
                             @endif
-                        
+
                             @if($property->bedrooms)
                                 <span><i class="fas fa-bed"></i> <span>Bed Rooms:</span> {{ $property->bedrooms }}</span>
                             @endif
-                        
+
                             @if($property->dimension)
                                 <span><i class="fa fa-map-signs" aria-hidden="true"></i><span>Dimension:</span> {{ $property->dimension }}</span>
                             @endif
@@ -625,7 +625,7 @@ $(document).ready(function() {
 
             var priceCondition = (priceMin === 0 || propertyPrice >= priceMin) &&
                                  (priceMax === Infinity || propertyPrice <= priceMax);
-            
+
             var sizeCondition = (sizeMin === 0 || propertySize >= sizeMin) &&
                                 (sizeMax === Infinity || propertySize <= sizeMax);
 
