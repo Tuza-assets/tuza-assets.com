@@ -38,5 +38,20 @@
             background-color: green;
             border-color: green;
         }
+        .bg-success{
+            background-color: green !important;
+        }
+        .text-primary{
+            color: orangered !important;
+        }
+        .text-success{
+            color: green !important;
+        }
+        .text-info, .text-warning, .text-danger {
+            color: orangered !important;
+        }
+        .bg-info, .bg-warning, .bg-danger {
+            background-color: orangered !important;
+        }
      </style>
 </head>

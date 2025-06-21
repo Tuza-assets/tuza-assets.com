@@ -167,7 +167,7 @@
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label for="map_link" class="form-label">Map Link</label>
-                                            <input type="url"
+                                            <input type="text"
                                                 class="form-control @error('map_link') is-invalid @enderror"
                                                 id="map_link" name="map_link" value="{{ old('map_link') }}">
                                             @error('map_link')
@@ -408,9 +408,43 @@
                                         <!-- Preview images will be displayed here -->
                                     </div>
                                 </div>
+                                <!-- Terms and Conditions for Image Upload -->
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input @error('image_terms') is-invalid @enderror"
+                                            type="checkbox" value="1" id="image_terms" name="image_terms"
+                                            onchange="toggleImageUpload()" {{ old('image_terms') ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="image_terms">
+                                            <strong>Terms and Conditions for Image Upload</strong>
+                                        </label>
+                                        @error('image_terms')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="p-3 mt-2 border rounded bg-light">
+                                        <small class="text-muted">
+                                            <strong>English:</strong><br>
+                                            • You are responsible for the correctness of the data/information you are
+                                            posting<br>
+                                            • Tuza Assets is not responsible for the accurate information provided by the
+                                            Commissionaires<br>
+                                            • All information you provide about this property you confirm to be true<br>
+                                            • Tuza Assets Ltd is not responsible for followers caused by inaccurate
+                                            information you provide<br><br>
+
+                                            <strong>Kinyarwanda:</strong><br>
+                                            • Amakuru yose utanga kuri uyu mutungo uremeza ko ari ukuri<br>
+                                            • Tuza Assets Ltd ntabwo yirengera inkurikizi zitewe n'uko amakuru utanze atari
+                                            ukuri<br>
+                                        </small>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="mt-4">
-                                <button type="submit" class="btn btn-primary">Create Property</button>
+                                <button type="submit" id="submit-btn" class="btn btn-primary" disabled>Create
+                                    Property</button>
                                 <a href="{{ route('partner.properties.index') }}" class="btn btn-secondary">Cancel</a>
                             </div>
                         </form>
@@ -419,11 +453,28 @@
             </div>
         </div>
     </div>
+    <!-- JavaScript: Enable/Disable Submit Button -->
+    <script>
+        function toggleImageUpload() {
+            const checkbox = document.getElementById('image_terms');
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = !checkbox.checked;
+        }
+
+        // On page load, run the toggle in case old() has value
+        document.addEventListener('DOMContentLoaded', toggleImageUpload);
+    </script>
     <script>
         function previewImages(event) {
             const files = event.target.files;
             const previewContainer = document.getElementById('image_preview_container');
             previewContainer.innerHTML = ''; // Clear previous previews
+
+            if (files.length > 9) {
+                alert('You can upload a maximum of 9 images.');
+                event.target.value = ''; // Clear the file input
+                return;
+            }
 
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
@@ -434,19 +485,20 @@
                     const div = document.createElement('div');
                     div.className = 'col-md-3 mb-3';
                     div.innerHTML = `
-                        <div class="position-relative">
-                            <img src="${e.target.result}" class="rounded img-fluid" style="height: 200px; width: 100%; object-fit: cover;">
-                            <button type="button" class="top-0 m-2 btn btn-danger btn-sm position-absolute end-0" onclick="this.parentElement.parentElement.remove()">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    `;
+                    <div class="position-relative">
+                        <img src="${e.target.result}" class="rounded img-fluid" style="height: 200px; width: 100%; object-fit: cover;">
+                        <button type="button" class="top-0 m-2 btn btn-danger btn-sm position-absolute end-0" onclick="this.parentElement.parentElement.remove()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
                     previewContainer.appendChild(div);
                 };
                 reader.readAsDataURL(file);
             }
         }
     </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const baseUrl = 'https://property.tuza-assets.com/api/v1/locations';

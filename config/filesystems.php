@@ -44,17 +44,50 @@ return [
             'throw' => false,
         ],
 
-        'designs' => [
+        'blog_images' => [
             'driver' => 'local',
-            'root' => storage_path('app/designs'), 
-            'url' => env('APP_URL') . '/storage/designs', 
+            'root' => storage_path('app/blog_images'),
+            'url' => env('APP_URL') . '/storage/blog_images',
             'visibility' => 'public',
             'throw' => false,
         ],
+
+        'designs' => [
+            'driver' => 'local',
+            'root' => storage_path('app/designs'),
+            'url' => env('APP_URL') . '/storage/designs',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         'magazines' => [
             'driver' => 'local',
-            'root' => storage_path('app/magazines'), 
-            'url' => env('APP_URL') . '/storage/magazines', 
+            'root' => storage_path('app/magazines'),
+            'url' => env('APP_URL') . '/storage/magazines',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'property_images' => [
+            'driver' => 'local',
+            'root' => storage_path('app/property_images'),
+            'url' => env('APP_URL') . '/storage/property_images',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'profile_photos' => [
+            'driver' => 'local',
+            'root' => storage_path('app/profile_photos'),
+            'url' => env('APP_URL') . '/storage/profile_photos',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'zone_images' => [
+            'driver' => 'local',
+            'root' => storage_path('app/zone_images'),
+            'url' => env('APP_URL') . '/storage/zone_images',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -88,8 +121,12 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('blog_images') => storage_path('app/blog_images'),
         public_path('designs') => storage_path('app/designs'),
         public_path('magazines') => storage_path('app/magazines'),
+        public_path('property_images') => storage_path('app/property_images'),
+        public_path('profile_photos') => storage_path('app/profile_photos'),
+        public_path('zone_images') => storage_path('app/zone_images'),
     ],
 
 ];

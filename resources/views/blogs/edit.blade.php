@@ -2,7 +2,7 @@
 @extends('layouts.dashboard.blogs-layout')
 
 @section('content')
-    <div class="container bg-white mt-2 p-4">
+    <div class="container p-4 mt-14 bg-white">
         <h1>Edit Blog</h1>
         <form action="{{ route('admin.blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -29,7 +29,7 @@
                             @endforeach
                         </select>
                         </div>
-                        
+
                         <div class="px-3">
                             <!-- Add Category Button -->
                             <button type="button" class="ml-2 btn btn-sm btn-primary" data-toggle="modal" data-target="#addCategoryModal">
@@ -54,15 +54,15 @@
                         <input type="text" class="form-control" name="Authname" id="auth_name"
                             value="{{ old('auth_name', $blog->Authname ?? '') }}" required>
                     </div>
-                    
-                    
+
+
                     <!--<div class="col-md-6">-->
                     <!--    <div class="form-group">-->
                     <!--    <label for="auth_name">Author Name</label>-->
                     <!--    <input type="text" class="form-control" name="Authname" id="auth_name"-->
                     <!--        value="{{ old('auth_name', $blog->slug ?? '') }}" required>-->
                     <!--</div>-->
-                    
+
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select class="form-control" name="status" id="status">
@@ -77,20 +77,20 @@
                         <label for="images">Blog cover image</label>
                         <input type="file" class="form-control-file" name="images" id="images">
                         @if($blog->images)
-                            <img src="{{ asset('storage/' . $blog->images) }}" class="img-thumbnail mt-2" style="width: 100px; height: 100px;" alt="Blog Image">
+                            <img src="{{ asset('storage/' . $blog->images) }}" class="mt-2 img-thumbnail" style="width: 100px; height: 100px;" alt="Blog Image">
                         @endif
                     </div>
 
-                    <div class="form-group mt-3">
+                    <div class="mt-3 form-group">
                         <button type="submit" class="btn" style="background:#1D940F;color:white;">Update</button>
                     </div>
                 </div>
             </div>
 
         </form>
-        
-        
-        
+
+
+
     <!-- Add Category Modal -->
 <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

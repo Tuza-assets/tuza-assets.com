@@ -29,13 +29,13 @@
 </style>
 
 @section('content')
-<div class="container mt-5">
-    <div class="row">
+<div class="p-4 sm:ml-64">
+    <div class="mt-14 rounded-lg border-gray-200 dark:border-gray-700">
         <!-- Main Content Area -->
         <div class="col-md-8">
-            <div class="card mb-4">
+            <div class="mb-4 card">
                 @if(!empty($blog->images))
-                <img src="{{ asset('public/storage/' . $blog->images) }}" class="card-img-top" alt="Post Image">
+                <img src="{{ $blog->image_url }}" class="card-img-top" alt="Post Image">
                 @endif
                 <div class="card-body">
                     <div class="post-meta">

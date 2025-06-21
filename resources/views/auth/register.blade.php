@@ -1,54 +1,62 @@
 <x-guest-layout>
-    <div class="flex items-center justify-center min-h-screen bg-gray-100">
-        <div class="flex w-full max-w-5xl overflow-hidden bg-white rounded-lg shadow-lg">
+    <div class="flex justify-center items-center min-h-screen bg-gray-100">
+        <div class="flex overflow-hidden w-full max-w-5xl bg-white rounded-lg shadow-lg">
             <!-- Left Side: Image and Overlay -->
-            <div class="relative flex flex-col items-center justify-center w-1/2 p-8 bg-green-800 hidd-left"
+            <div class="flex relative flex-col justify-center items-center p-8 w-1/2 bg-green-800 hidd-left"
                 style="background: linear-gradient(rgba(34, 197, 94, 0.85), rgba(34, 197, 94, 0.85)), url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
                 <div class="z-10 text-center text-white">
                     <h2 class="mb-2 text-3xl font-bold">REGISTER NOW</h2>
                     <p class="text-lg font-semibold">while seats are available !</p>
                 </div>
             </div>
+
             <!-- Right Side: Form -->
-            <div class="w-full max-h-screen p-8 overflow-y-auto bg-white dark:bg-gray-800">
+            <div class="overflow-y-auto p-8 w-full max-h-screen bg-white dark:bg-gray-800">
                 <div class="w-full">
-                    <div class="w-full mb-8 text-center">
+                    <div class="mb-8 w-full text-center">
                         <x-authentication-card-logo class="mx-auto mb-4" />
                         <h1 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">Create Account</h1>
                         <p class="text-gray-600 dark:text-gray-400">Fill in your details to get started</p>
                     </div>
-
+                    <hr>
                     <!-- Validation Errors Alert -->
                     <x-validation-errors class="mb-4" />
 
-                    <form method="POST" action="{{ route('register') }}" class="w-full space-y-6">
+                    <form method="POST" action="{{ route('register') }}" class="space-y-6 w-full">
                         @csrf
 
                         <!-- Name and Email Row -->
-                        <div class="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-                            <div>
+                        <div class="grid grid-cols-1 gap-4 w-full md:grid-cols-2">
+                            <div class="py-4">
                                 <label for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     {{ __('Name') }}
                                 </label>
                                 <input type="text" id="name" name="name" value="{{ old('name') }}"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                                     placeholder="John Doe" required autofocus autocomplete="name">
-                                <div class="py-4">
-                                    <input type="number" id="phone" name="phone" value="{{ old('phone') }}"
-                                        class="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                                        placeholder="+25078xxxxxx" required autofocus autocomplete="name">
-                                </div>
                             </div>
-                            <div>
+                            <div class="py-4">
                                 <label for="email"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     {{ __('Email') }}
                                 </label>
                                 <input type="email" id="email" name="email" value="{{ old('email') }}"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                                     placeholder="john@example.com" required autocomplete="username">
                             </div>
+                            <div class="py-4">
+                                <input type="number" id="phone" name="phone" value="{{ old('phone') }}"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                    placeholder="Phone: +25078xxxxxx" required autofocus autocomplete="name">
+                            </div>
+                            <div class="py-4">
+                                <input type="number" id="other_phone" name="other_phone"
+                                    value="{{ old('other_phone') }}"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                    placeholder="Other Phone:+25078xxxxxx" required autofocus autocomplete="name">
+                            </div>
+
                         </div>
 
 
@@ -76,7 +84,7 @@
                                     </label>
                                     <input type="text" id="country" name="country"
                                         value="{{ $property->country ?? 'Rwanda' }}"
-                                        class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-100 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                         readonly>
                                 </div>
                                 <div>
@@ -85,7 +93,7 @@
                                         Province
                                     </label>
                                     <select id="province_select" required
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                                         <option value="">Select Province</option>
                                     </select>
                                 </div>
@@ -95,7 +103,7 @@
                                         District
                                     </label>
                                     <select id="district_select" required disabled
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 disabled:opacity-50">
+                                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 disabled:opacity-50">
                                         <option value="">Select District</option>
                                     </select>
                                 </div>
@@ -105,7 +113,7 @@
                                         Sector
                                     </label>
                                     <select id="sector_select" required disabled
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 disabled:opacity-50">
+                                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 disabled:opacity-50">
                                         <option value="">Select Sector</option>
                                     </select>
                                 </div>
@@ -115,7 +123,7 @@
                                         Cell
                                     </label>
                                     <select id="cell_select" required disabled
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 disabled:opacity-50">
+                                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 disabled:opacity-50">
                                         <option value="">Select Cell</option>
                                     </select>
                                 </div>
@@ -128,7 +136,7 @@
                                         Village
                                     </label>
                                     <select id="village_select" required disabled
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 disabled:opacity-50">
+                                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 disabled:opacity-50">
                                         <option value="">Select Village</option>
                                     </select>
                                 </div>
@@ -143,7 +151,7 @@
                                 </label>
                                 <div class="relative">
                                     <input type="password" id="password" name="password"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                                         placeholder="••••••••" required autocomplete="new-password">
                                 </div>
                             </div>
@@ -153,7 +161,7 @@
                                     {{ __('Confirm Password') }}
                                 </label>
                                 <input type="password" id="password_confirmation" name="password_confirmation"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                                     placeholder="••••••••" required autocomplete="new-password">
                             </div>
                         </div>
@@ -162,7 +170,7 @@
                             <div class="flex items-start mb-6">
                                 <div class="flex items-center h-5">
                                     <input id="terms" name="terms" type="checkbox" value="" required
-                                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-green-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-green-600 dark:ring-offset-gray-800 dark:focus:ring-offset-2">
+                                        class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-green-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-green-600 dark:ring-offset-gray-800 dark:focus:ring-offset-2">
                                 </div>
                                 <label for="terms"
                                     class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -184,7 +192,7 @@
                             </div>
                         @endif
 
-                        <div class="flex items-center justify-between mt-8">
+                        <div class="flex justify-between items-center mt-8">
                             <a class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 href="{{ route('login') }}">
                                 {{ __('Already registered?') }}

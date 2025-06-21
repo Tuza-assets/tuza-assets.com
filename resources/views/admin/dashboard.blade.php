@@ -1,30 +1,26 @@
 @extends('layouts.dashboard.app')
 
 @section('content')
-    
-    <div class="page-breadcrumb">
-        <div class="row align-items-center">
-            <div class="col-md-6 col-8 align-self-center">
-                <h3 class="p-0 mb-0 page-title">Dashboard</h3>
-                <div class="d-flex align-items-center">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                        </ol>
-                    </nav>
+    <div class="p-4 sm:ml-64">
+        <div class="dark:border-gray-700 mt-14">
+            <div class="px-3 content">
+                <div class="row align-items-center">
+                    <div class="col-md-6 col-8 align-self-center">
+                        <h3 class="p-0 mb-0 page-title">Dashboard</h3>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="bg-white container-fluid">
-
-        <div class="content">
-            <div class="container">
-
+            <div class="content">
                 <!-- Page-Title -->
-                <div class="row">
+                <div class="px-3 row">
                     <div class="col-sm-12">
                         <h4 class="pull-left page-title">WELCOME {{ Auth::user()->name }}</h4>
                     </div>
@@ -134,7 +130,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

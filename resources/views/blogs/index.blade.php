@@ -1,13 +1,12 @@
 @extends('layouts.dashboard.app')
-
 @section('content')
-    <div class="bg-white container-fluid">
-        <div class="row">
-            <div class="p-3 bg-white border rounded shadow-md col-lg-12">
+    <div class="p-4 sm:ml-64">
+        <div class="mt-14 rounded-lg border-gray-200 dark:border-gray-700">
+            <div class="p-3 bg-white rounded border shadow-md col-lg-12">
                 <h1 class="mb-4 text-2xl font-bold">Blogs</h1>
                 <a href="{{ route('admin.blogs.create') }}"
                     class="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700">Create Blog</a>
-                <table class="w-full mt-4 table-auto">
+                <table class="mt-4 w-full table-auto">
                     <thead>
                         <tr>
                             <th class="px-4 py-2">Title</th>
@@ -24,9 +23,9 @@
                                 <td class="px-4 py-2 border">{{ $blog->status }}</td>
                                 <td class="gap-2 px-4 py-2 border d-flex">
                                     <a href="{{ route('admin.blogs.show', $blog->id) }}"
-                                        class="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700 h-1/2">View</a>
+                                        class="px-4 py-2 h-1/2 font-bold text-white bg-green-500 rounded hover:bg-green-700">View</a>
                                     <a href="{{ route('admin.blogs.edit', $blog->id) }}"
-                                        class="px-4 py-2 font-bold text-white bg-orange-500 rounded hover:bg-orange-700 h-1/2">Edit</a>
+                                        class="px-4 py-2 h-1/2 font-bold text-white bg-orange-500 rounded hover:bg-orange-700">Edit</a>
                                     <form action="{{ route('admin.blogs.destroy', $blog->id) }}" method="POST"
                                         class="inline">
                                         @csrf

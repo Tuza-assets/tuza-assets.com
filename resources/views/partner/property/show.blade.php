@@ -1,6 +1,6 @@
 @extends('layouts.dashboard.app')
 @section('content')
-<div class="bg-white container-fluid">
+    <div class="py-5 mt-5 bg-white container-fluid">
     <div class="row">
         <div class="container p-3 mx-auto col-md-12">
             <div class="card">
@@ -154,7 +154,7 @@
                                         <th>Amenities</th>
                                         <td>
                                             @foreach($property->amenities as $amenity)
-                                                <span class="badge bg-info me-1">{{ $amenity }}</span>
+                                                <span class="m-2 badge bg-info me-1">{{ $amenity }}</span>
                                             @endforeach
                                         </td>
                                     </tr>
@@ -164,22 +164,36 @@
 
                         <!-- Additional Images -->
                         @if($property->images)
-                            @php
-                                $images = is_string($property->images) ? json_decode($property->images, true) : $property->images;
-                            @endphp
-                            @if(is_array($images) && count($images) > 0)
-                                <div class="mt-4 col-12">
-                                    <h6 class="mb-3">Additional Images</h6>
-                                    <div class="row">
-                                        @foreach($images as $image)
-                                            <div class="mb-3 col-md-3">
-                                                <img src="{{ asset($image) }}" alt="Property Image" class="img-thumbnail" style="max-height: 200px; width: 100%; object-fit: cover;">
-                                            </div>
-                                        @endforeach
-                                    </div>
+                        @php
+                            $images = is_string($property->images) ? json_decode($property->images, true) : $property->images;
+                        @endphp
+                        @if(is_array($images) && count($images) > 0)
+                            <div class="mt-4 col-12">
+                                <h6 class="mb-3">Additional Images</h6>
+                                <div class="row">
+                                    @foreach($images as $image)
+                                        <div class="mb-3 col-md-3">
+                                            <img src="{{ asset($image) }}"
+                                                 alt="Property Image"
+                                                 class="img-thumbnail"
+                                                 style="max-height: 200px; width: 100%; object-fit: cover;">
+                                        </div>
+                                    @endforeach
                                 </div>
-                            @endif
+                            </div>
                         @endif
+                    @endif
+
+                    {{-- For the main image as well --}}
+                    @if($property->mainimage)
+                        <div class="mb-3">
+                            <h6 class="mb-3">Main Image</h6>
+                            <img src="{{ asset($property->mainimage) }}"
+                                 alt="Main Property Image"
+                                 class="img-thumbnail"
+                                 style="max-height: 300px; width: 100%; object-fit: cover;">
+                        </div>
+                    @endif
                     </div>
                 </div>
             </div>

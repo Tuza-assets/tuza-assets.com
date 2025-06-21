@@ -106,8 +106,13 @@ Route::get('login/sell', [LoginController::class, 'sell_index'])->name('admin.lo
 
 Route::post('/favority/{productId}', [PropertyOnSellController::class, 'favorite'])->name('properties.favority');
 
+Route::get('Partner/Terms', function () {
+    return view('partner.terms_and_condition.register_term');
+})->name('partener.terms_and_condition');
+
 Route::group(
     [
+        'prefix' => LaravelLocalization::setLocale(),
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
     ],
     function () {
@@ -115,6 +120,11 @@ Route::group(
 
         Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
             Route::get('/dashboard', [AuthController::class, 'index'])->name('dashboard');
+            // Profile Information Routes
+            Route::put('/user/profile-information', [App\Http\Controllers\profile\ProfileController::class, 'update'])->name('user-profile-information.update');
+
+            Route::delete('/user/profile-photo', [App\Http\Controllers\profile\ProfileController::class, 'destroyPhoto'])->name('current-user-photo.destroy');
+
             Route::prefix('admin')
                 ->name('admin.')
                 ->group(function () {

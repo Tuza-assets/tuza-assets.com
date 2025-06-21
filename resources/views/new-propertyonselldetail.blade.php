@@ -66,7 +66,7 @@
                 @endphp
 
                 <div class="py-3 text-white card card-img-top fixed-height-image main-image"
-                    style="background-image: url('{{ asset('public/' . $mainImage) }}');
+                    style="background-image: url('{{ asset($mainImage) }}');
                                 background-size: cover; background-position: center;  height: 500px;">
 
                     <!-- Card Content -->
@@ -128,8 +128,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
             <div class="col-md-4 d-none d-md-block">
@@ -138,7 +136,7 @@
                         <div class="mb-4 col-6">
                             <div class="image-wrapper">
                                 <div class="py-3 text-white card img-fluid thumbnail-image"
-                                    style="background-image: url('{{ asset('public/' . (is_string($image) ? $image : $image['path'])) }}');
+                                    style="background-image: url('{{ asset(is_string($image) ? $image : $image['path']) }}');
                                 background-size: cover; background-position: center;  height: 500px;">
 
                                     <!-- Card Content -->
@@ -220,7 +218,6 @@
                 </a>
             </div>
         </div>
-
 
 
         <div class="px-0 row px-sm-1 px-md-2 px-lg-3">
@@ -568,20 +565,31 @@
             </div>
             <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
                 @if (isset($property->user_id) && $property->user)
-                <div>
-                    <img src="{{ asset('assets/images/avatar-659652_1280.webp') }}" alt="User Avatar"
-                         class="mb-2 bg-white img-fluid">
+                    <div>
+                        @if (isset($property->user->profile_photo_path) && $property->user->profile_photo_path)
+                            <img src="{{ asset('profile_photos/' . $property->user->profile_photo_path) }}" alt="User Avatar"
+                                class="mb-2 bg-white img-fluid">
+                        @else
+                            <img src="{{ asset('assets/images/avatar-659652_1280.webp') }}" alt="User Avatar"
+                                class="mb-2 bg-white img-fluid">
+                        @endif
+                        <h1 class="h5"><strong>By:</strong>{{ $property->user->name }}</h1>
 
-                    <h1 class="h5"><strong>By:</strong>{{ $property->user->name }}</h1>
-
-                    @if (!empty($property->user->phone))
-                        <a class="mb-2 btn btn-outline-success btn-block"
-                           href="https://wa.me/{{ $property->user->phone }}?text=What%20about%20your%20service"
-                           target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-whatsapp"></i> {{ $property->user->phone }}
-                        </a>
-                    @endif
-                </div>
+                        @if (!empty($property->user->phone))
+                            <a class="mb-2 btn btn-outline-success btn-block"
+                                href="https://wa.me/{{ $property->user->phone }}?text=What%20about%20your%20service"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-whatsapp"></i> {{ $property->user->phone }}
+                            </a>
+                        @endif
+                        @if (!empty($property->user->other_phone))
+                            <a class="mb-2 btn btn-outline-success btn-block"
+                                href="https://wa.me/{{ $property->user->other_phone }}?text=What%20about%20your%20service"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-whatsapp"></i> {{ $property->user->other_phone }}
+                            </a>
+                        @endif
+                    </div>
                 @else
                     <div class="container">
                         <div class="px-3">

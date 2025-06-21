@@ -54,26 +54,26 @@
     }
 </style>
 
-<div class="p-6 bg-white">
+<div class="mt-14 rounded-lg border-gray-200 dark:border-gray-700">
     <div class="col-lg-12 col-xlg-12 col-md-12">
-        <div class="card bg-white shadow-lg">
-            <div class="card-body">
+        <div class="bg-white shadow-lg card">
+         <P></P>   <div class="card-body">
                 <h2 class="mb-4">Edit Design</h2>
-                <form action="{{ route('designs.update', $design->id) }}" method="POST" enctype="multipart/form-data" class="form-horizontal form-material mx-2">
+                <form action="{{ route('designs.update', $design->id) }}" method="POST" enctype="multipart/form-data" class="mx-2 form-horizontal form-material">
                     @csrf
                     @method('PUT')
-                    
+
                     <!-- Name Field -->
                     <div class="form-group">
-                        <label class="col-md-12 mb-0">Name</label>
+                        <label class="mb-0 col-md-12">Name</label>
                         <div class="col-md-12">
-                            <input type="text" name="name" value="{{ $design->name }}" class="form-control border" required>
+                            <input type="text" name="name" value="{{ $design->name }}" class="border form-control" required>
                         </div>
                     </div>
 
                     <!-- Package Includes Field -->
                     <div class="form-group">
-                        <label class="col-md-12 mb-0">Package Includes</label>
+                        <label class="mb-0 col-md-12">Package Includes</label>
                         <div class="col-md-12">
                             <textarea rows="5" id="editor" name="package_includes" required>{{ $design->package_includes }}</textarea>
                         </div>
@@ -81,25 +81,25 @@
 
                     <!-- Number of Rooms Field -->
                     <div class="form-group">
-                        <label class="col-md-12 mb-0">Number of Rooms</label>
+                        <label class="mb-0 col-md-12">Number of Rooms</label>
                         <div class="col-md-12">
-                            <input type="number" name="number_of_rooms" value="{{ $design->number_of_rooms }}" class="form-control form-control-line border" required>
+                            <input type="number" name="number_of_rooms" value="{{ $design->number_of_rooms }}" class="border form-control form-control-line" required>
                         </div>
                     </div>
 
                     <!-- Additional Information Field -->
                     <div class="form-group">
-                        <label class="col-md-12 mb-0">Additional Information</label>
+                        <label class="mb-0 col-md-12">Additional Information</label>
                         <div class="col-md-12">
-                            <textarea rows="5" class="form-control form-control-line border" name="additional_information">{{ $design->additional_information }}</textarea>
+                            <textarea rows="5" class="border form-control form-control-line" name="additional_information">{{ $design->additional_information }}</textarea>
                         </div>
                     </div>
 
                     <!-- Price Field -->
                     <div class="form-group">
-                        <label class="col-md-12 mb-0">Price</label>
+                        <label class="mb-0 col-md-12">Price</label>
                         <div class="col-md-12">
-                            <input type="text" name="price" value="{{ $design->price }}" class="form-control form-control-line border" required>
+                            <input type="text" name="price" value="{{ $design->price }}" class="border form-control form-control-line" required>
                         </div>
                     </div>
 
@@ -107,7 +107,7 @@
                     <div class="form-group">
                         <label class="col-sm-12">Currency</label>
                         <div class="col-sm-12">
-                            <select class="form-select shadow-none form-control-line border" name="currency">
+                            <select class="border shadow-none form-select form-control-line" name="currency">
                                 <option value="Rwf" {{ $design->currency == 'Rwf' ? 'selected' : '' }}>Rwf</option>
                                 <option value="$" {{ $design->currency == '$' ? 'selected' : '' }}>$</option>
                             </select>
@@ -116,33 +116,33 @@
 
                     <!-- Zone Field -->
                     <div class="form-group">
-                        <label class="col-md-12 mb-0">Zone</label>
+                        <label class="mb-0 col-md-12">Zone</label>
                         <div class="col-md-12">
-                            <input type="text" name="zone" value="{{ $design->zone }}" class="form-control form-control-line border">
+                            <input type="text" name="zone" value="{{ $design->zone }}" class="border form-control form-control-line">
                         </div>
                     </div>
 
                     <!-- Size Field -->
                     <div class="form-group">
-                        <label class="col-md-12 mb-0">Size</label>
+                        <label class="mb-0 col-md-12">Size</label>
                         <div class="col-md-12">
-                            <input type="text" name="size" value="{{ $design->size }}" class="form-control form-control-line border">
+                            <input type="text" name="size" value="{{ $design->size }}" class="border form-control form-control-line">
                         </div>
                     </div>
 
                     <!-- Dimensions Field -->
                     <div class="form-group">
-                        <label class="col-md-12 mb-0">Dimensions</label>
+                        <label class="mb-0 col-md-12">Dimensions</label>
                         <div class="col-md-12">
-                            <input type="text" name="dimensions" value="{{ $design->dimensions }}" class="form-control form-control-line border">
+                            <input type="text" name="dimensions" value="{{ $design->dimensions }}" class="border form-control form-control-line">
                         </div>
                     </div>
 
                     <!-- Main Image Field -->
                     <div class="form-group">
-                        <label class="col-md-12 mb-0">Main Image</label>
+                        <label class="mb-0 col-md-12">Main Image</label>
                         <div class="col-md-12">
-                            <input type="file" name="main_image" onchange="previewImage(event, 'main_image_preview_container')" class="form-control form-control-line border">
+                            <input type="file" name="main_image" onchange="previewImage(event, 'main_image_preview_container')" class="border form-control form-control-line">
                             <div class="file-preview" id="main_image_preview_container">
                                 @if($design->main_image)
                                     <img id="main_image_preview" src="{{ asset('public/' . $design->main_image) }}">
@@ -157,15 +157,15 @@
 
                     <!-- Additional Images Field -->
                     <div class="form-group">
-                        <label class="col-md-12 mb-0">Additional Images</label>
+                        <label class="mb-0 col-md-12">Additional Images</label>
                         <div class="col-md-12">
                             <input type="file" name="images[]" multiple onchange="previewImages(event)" class="form-control form-control-line">
                             <div class="file-preview" id="additional_images_preview_container">
-                                <div id="additional_images_preview" class="d-flex flex-wrap">
+                                <div id="additional_images_preview" class="flex-wrap d-flex">
                                     @if($design->additional_images)
                                         @foreach(json_decode($design->additional_images, true) as $image)
-                                            <div class="position-relative mr-2 mb-2">
-                                                <img src="{{ asset('public/storage/' . $image) }}" class="w-16 h-16 object-cover rounded">
+                                            <div class="mr-2 mb-2 position-relative">
+                                                <img src="{{ asset('public/storage/' . $image) }}" class="object-cover w-16 h-16 rounded">
                                                 <button type="button" class="close-btn" onclick="removeImage('additional_images_preview')">&times;</button>
                                             </div>
                                         @endforeach
@@ -175,7 +175,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group text-right">
+                    <div class="text-right form-group">
                         <button type="submit" class="custom-button">Update</button>
                     </div>
                 </form>

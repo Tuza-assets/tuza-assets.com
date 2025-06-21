@@ -11,11 +11,10 @@
             <label for="contents">Zone description</label>
             <div id="content-sections">
                 <textarea id="editor" name="description"></textarea>
-            </div> 
+            </div>
         </div>
 
         <div class="form-group">
-            <label for="images">Zone cover images</label>
             <input type="file" class="form-control-file" name="images[]" id="images" multiple>
         </div>
 

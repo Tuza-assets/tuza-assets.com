@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Zonning;
+use Illuminate\Support\Facades\Storage;
 
 class ZonningController extends Controller
 {
@@ -24,32 +25,33 @@ class ZonningController extends Controller
         return view('Zonnings.create');
     }
 
-public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'required|string',
-        'images.*' => 'image',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    $zonning = new Zonning();
-    $zonning->name = $request->input('name');
-    $zonning->description = $request->input('description');
+        $zonning = new Zonning();
+        $zonning->name = $request->input('name');
+        $zonning->description = $request->input('description');
 
-    $images = [];
-    if ($request->hasFile('images')) {
-        foreach ($request->file('images') as $image) {
-            $path = $image->store('zones', 'public');
-            $images[] = url('public/storage/' . $path); // Store full URL
+        $imageUrls = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('/', 'zone_images');
+                // Generate custom URL format: domain/zone_images/filename
+                $fullUrl = url('/zone_images/' . $path);
+                $imageUrls[] = $fullUrl;
+            }
         }
+
+        $zonning->images = json_encode($imageUrls);
+        $zonning->save();
+
+        return redirect()->route('admin.Zonning')->with('success', 'Zone created successfully');
     }
-
-    $zonning->images = json_encode($images);
-    $zonning->save();
-
-    return redirect()->route('admin.Zonning')->with('success', 'Zone created successfully');
-}
-
 
     public function show(Zonning $Zonning)
     {
@@ -61,37 +63,80 @@ public function store(Request $request)
         return view('Zonnings.edit', compact('Zonning'));
     }
 
-   public function update(Request $request, Zonning $Zonning)
+    public function update(Request $request, Zonning $Zonning)
     {
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'images.*' => 'image',
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-    
-        $data = $request->all();
-    
+
+        $data = $request->only(['name', 'description']);
+
         if ($request->hasFile('images')) {
-            $imagePaths = [];
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('images', 'public');
-                $imagePaths[] = url('public/storage/' . $path); // Store full URL
+            // Delete old images
+            if ($Zonning->images) {
+                $oldImageUrls = json_decode($Zonning->images, true);
+                foreach ($oldImageUrls as $oldImageUrl) {
+                    // Extract the path from the full URL for deletion
+                    $relativePath = $this->extractPathFromUrl($oldImageUrl);
+                    if ($relativePath && Storage::disk('zone_images')->exists($relativePath)) {
+                        Storage::disk('zone_images')->delete($relativePath);
+                    }
+                }
             }
-            $data['images'] = json_encode($imagePaths);
+
+            // Store new images
+            $imageUrls = [];
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('/', 'zone_images');
+                // Generate custom URL format: domain/zone_images/filename
+                $fullUrl = url('/zone_images/' . $path);
+                $imageUrls[] = $fullUrl;
+            }
+            $data['images'] = json_encode($imageUrls);
         }
-    
+
         $Zonning->update($data);
-    
+
         return redirect()->route('admin.Zonning')
             ->with('success', 'Zonning updated successfully.');
     }
 
     public function destroy(Zonning $Zonning)
     {
+        // Delete associated images
+        if ($Zonning->images) {
+            $imageUrls = json_decode($Zonning->images, true);
+            foreach ($imageUrls as $imageUrl) {
+                // Extract the path from the full URL for deletion
+                $relativePath = $this->extractPathFromUrl($imageUrl);
+                if ($relativePath && Storage::disk('zone_images')->exists($relativePath)) {
+                    Storage::disk('zone_images')->delete($relativePath);
+                }
+            }
+        }
+
         $Zonning->delete();
         return redirect()->route('admin.Zonning')
             ->with('success', 'Zonning deleted successfully.');
     }
+
+    /**
+     * Extract relative path from full URL for file operations
+     */
+    private function extractPathFromUrl($url)
+    {
+        // Extract filename from URL like: http://127.0.0.1:5000/zone_images/filename.jpg
+        $urlParts = parse_url($url);
+        $path = $urlParts['path'];
+
+        // Remove '/zone_images/' prefix to get just the filename
+        if (strpos($path, '/zone_images/') === 0) {
+            return substr($path, strlen('/zone_images/'));
+        }
+
+        // Fallback: extract filename
+        return basename($url);
+    }
 }
-
-

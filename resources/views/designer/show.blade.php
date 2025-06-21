@@ -1,14 +1,13 @@
 @extends('layouts.dashboard.app')
 
 @section('content')
-    <div class="max-w-6xl mx-auto my-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="mt-14 rounded-lg border-gray-200 dark:border-gray-700">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
-                
-                <div class="main-image-container mb-3 h-96 overflow-hidden rounded-lg">
+                <div class="overflow-hidden mb-3 h-96 rounded-lg main-image-container">
                     @if (!empty($design->images) && count($design->images) > 0)
                         <figure
-                            class="max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+                            class="max-w-sm filter grayscale transition-all duration-300 cursor-pointer hover:grayscale-0">
                             <a href="#">
                                 <img id="mainImage" src="{{ asset($design->images[0]) }}" class="rounded-lg"
                                     alt="image description">
@@ -18,13 +17,13 @@
                         <p>No images available for this design.</p>
                     @endif
                 </div>
-                <div class="flex mt-3 flex-wrap">
+                <div class="flex flex-wrap mt-3">
                     @if (!empty($design->images) && count($design->images) > 0)
                         @foreach ($design->images as $image)
-                            <div class="thumbnail-item p-2">
+                            <div class="p-2 thumbnail-item">
                                 <a href="#" data-id="{{ $loop->index }}" class="thumbnail-link">
                                     <img src="{{ asset($image) }}" alt="Thumbnail"
-                                        class="w-16 h-16 object-cover rounded cursor-pointer">
+                                        class="object-cover w-16 h-16 rounded cursor-pointer">
                                 </a>
                             </div>
                         @endforeach
@@ -33,15 +32,15 @@
             </div>
             <div>
                 <div class="p-8 bg-white rounded-lg shadow-lg">
-                    <div class="relative overflow-hidden mb-4">
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                            <h1 class="text-white text-4xl font-bold">{{ $design->title }}</h1>
+                    <div class="overflow-hidden relative mb-4">
+                        <div class="flex absolute inset-0 justify-center items-center bg-black bg-opacity-50">
+                            <h1 class="text-4xl font-bold text-white">{{ $design->title }}</h1>
                         </div>
                     </div>
-                    <p class="text-gray-700 mb-4">{{ $design->description }}</p>
-                    <div class="flex items-center justify-between">
-                        <p class="text-lg text-gray-800 font-semibold">{{ $design->currency }}{{ $design->price }}</p>
-                        <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Purchase</button>
+                    <p class="mb-4 text-gray-700">{{ $design->description }}</p>
+                    <div class="flex justify-between items-center">
+                        <p class="text-lg font-semibold text-gray-800">{{ $design->currency }}{{ $design->price }}</p>
+                        <button class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">Purchase</button>
                     </div>
                 </div>
             </div>

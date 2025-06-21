@@ -39,6 +39,8 @@ class User extends Authenticatable
         'village',
         'status',
         'session_role',
+        'other_phone',
+        'profile_photo_path',
     ];
 
     /**

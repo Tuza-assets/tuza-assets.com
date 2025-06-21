@@ -1,7 +1,8 @@
 <style>
-    .navbar{
-        padding:10px 30px;
+    .navbar {
+        padding: 10px 30px;
     }
+
     .navbar-nav .nav-link:hover,
     .navbar-nav .nav-link:focus {
         color: #4caf50;
@@ -11,7 +12,7 @@
     .navbar-nav .nav-item .nav-link {
         text-transform: uppercase;
         font-size: .7em;
-        
+
     }
 
     .dropdown-menu {
@@ -51,9 +52,11 @@
     .navbar-brand:hover {
         color: #e84c0b;
     }
+
     .navbar-brand img {
         max-width: 200px;
     }
+
     .dropdown-divider {
         height: 1px;
         margin: 0.5rem 0;
@@ -70,7 +73,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light ">
     <a class="navbar-brand" href="{{ route('welcome') }}">
-        <img src="{{ asset('assets/images/Logo-nobg.png') }}" alt="Logo"  >
+        <img src="{{ asset('assets/images/Logo-nobg.png') }}" alt="Logo">
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
@@ -78,7 +81,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
+        <ul class="ml-auto navbar-nav">
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('welcome') }}">{{ __('message.home') }}</a>
             </li>
@@ -95,17 +98,35 @@
                     <a class="dropdown-item" href="{{ route('diplomats') }}">{{ __('message.for_diplomats') }}</a>
                     <a class="dropdown-item" href="{{ route('all_property') }}">{{ __('message.for_tenants') }}</a>
                     <!--<a class="dropdown-item" href="{{ route('tenant.view') }}">{{ __('message.for_tenants') }}</a>-->
-                    <a class="dropdown-item" href="https://loancalculator.tuza-assets.com/en">{{ __('message.bank_loan_calculator') }}</a>
-                    <a class="dropdown-item" href="{{ route('insurance&secturity.view') }}">{{ __('message.insurance_security') }}</a>
-                    <a class="dropdown-item" href="{{ route('legal-issues-facilitation') }}">{{ __('message.legal_issues_facilitation') }}</a>
-                    <a class="dropdown-item" href="{{ route('bank-loan-application') }}">{{ __('message.bank_loan_application') }}</a>
+                    <a class="dropdown-item"
+                        href="https://loancalculator.tuza-assets.com/en">{{ __('message.bank_loan_calculator') }}</a>
+                    <a class="dropdown-item"
+                        href="{{ route('insurance&secturity.view') }}">{{ __('message.insurance_security') }}</a>
+                    <a class="dropdown-item"
+                        href="{{ route('legal-issues-facilitation') }}">{{ __('message.legal_issues_facilitation') }}</a>
+                    <a class="dropdown-item"
+                        href="{{ route('bank-loan-application') }}">{{ __('message.bank_loan_application') }}</a>
                     <a class="dropdown-item" href="{{ route('BuyPlot') }}">{{ __('message.buy_plot') }}</a>
                 </div>
             </li>
-            <li class="nav-item">
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownServices" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ __('Property Management') }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownServices">
+                    <a class="dropdown-item"
+                        href="{{ route('PropertyManagement') }}">{{ __('message.property_management') }}</a>
+                    <a class="dropdown-item"
+                        href="{{ route('new-propertyonsell') }}">{{ __('message.house_for_sell') }}</a>
+                    <a class="dropdown-item" href="{{ route('BuyPlot') }}">{{ __('message.buy_plot') }}</a>
+                </div>
+            </li>
+            {{-- <li class="nav-item">
                 <a class="nav-link"
                     href="{{ route('PropertyManagement') }}">{{ __('message.property_management') }}</a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('investors') }}">{{ __('message.investors') }}</a>
             </li>
@@ -115,32 +136,36 @@
             <!--<li class="nav-item">-->
             <!--    <a class="nav-link" href="{{ route('all_blogs') }}">Blogs</a>-->
             <!--</li>-->
-            
-            <li class="nav-item">
+
+            {{-- <li class="nav-item">
                 <!--<a class="nav-link" href="{{ route('propertyonsell.all') }}">{{__('message.house_for_sell')}}</a>-->
                 <a class="nav-link" href="{{ route('new-propertyonsell') }}">{{__('message.house_for_sell')}}</a>
-            </li>
-            <li class="nav-item">
+            </li> --}}
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('BuyPlot') }}">{{ __('message.buy_plot') }}</a>
-            </li>
+            </li> --}}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownServices" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{__('home.Login')}} / {{__('home.Register')}}
+                    {{ __('home.Login') }} / {{ __('home.Register') }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownServices">
-                    <a class="dropdown-item" href="https://property.tuza-assets.com/register" target="_blank">{{__('home.Tenant')}}</a>
-                    <a class="dropdown-item" href="https://property.tuza-assets.com/register" target="_blank">{{__('home.Landlord')}} </a>
-                    <a class="dropdown-item" href="https://bid.afrinnovators.co.rw/register" target="_blank">{{__('home.Bidding')}}</a>
+                    <a class="dropdown-item" href="https://property.tuza-assets.com/register"
+                        target="_blank">{{ __('home.Tenant') }}</a>
+                    <a class="dropdown-item" href="https://property.tuza-assets.com/register"
+                        target="_blank">{{ __('home.Landlord') }} </a>
+                    <a class="dropdown-item" href="https://bid.afrinnovators.co.rw/register"
+                        target="_blank">{{ __('home.Bidding') }}</a>
+                    <a class="dropdown-item" href={{ route('partener.terms_and_condition') }}>{{ __('Commissioner') }}</a>
                 </div>
             </li>
             <li class="nav-item">
-                  <a class="nav-link" href="{{ LaravelLocalization::getLocalizedURL('en') }}"><span
-                            class="fi fi-gb"></span> English</a>
+                <a class="nav-link" href="{{ LaravelLocalization::getLocalizedURL('en') }}"><span
+                        class="fi fi-gb"></span> English</a>
             </li>
             <li class="nav-item">
-                    <a class="nav-link" href="{{ LaravelLocalization::getLocalizedURL('fr') }}"><span
-                            class="fi fi-fr"></span> FRANCAIS</a>
+                <a class="nav-link" href="{{ LaravelLocalization::getLocalizedURL('fr') }}"><span
+                        class="fi fi-fr"></span> FRANCAIS</a>
             </li>
         </ul>
     </div>

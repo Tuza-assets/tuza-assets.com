@@ -1060,7 +1060,7 @@
                                                 <a href="{{ route('new-propertyonselldetail', $property->id) }}"
                                                     class="text-decoration-none">
                                                     <div class="card-img-top zoom-image"
-                                                        style="background: url('{{ asset('public/' . $firstImage) }}') center/cover no-repeat; height: 200px;">
+                                                        style="background: url('{{ asset($firstImage) }}') center/cover no-repeat; height: 200px;">
                                                     </div>
                                                 </a>
                                                 <div class="card-body" style="font-size:14px;">
@@ -1114,7 +1114,7 @@
                                 class="text-decoration-none">
                                 <div class="overflow-hidden text-white card h-100">
                                     <div class="card-img-top zoom-image"
-                                        style="background: url('{{ asset('public/' . $firstImage) }}') center/cover no-repeat; height: 280px;">
+                                        style="background: url('{{ asset($firstImage) }}') center/cover no-repeat; height: 280px;">
                                     </div>
                                     <div class="card-body">
                                         <div class="pb-3 text-success">
@@ -1176,7 +1176,7 @@
                                                 style="border: 1px solid #e3e3e3; padding: 10px;">
                                                 <a href="{{ route('blogdetail', $blog->slug) }}">
                                                     <div class="flex-shrink-0 px-0" style="width: 230px;">
-                                                        <img src="{{ isset($blog->images) ? asset('public/storage/' . $blog->images) : asset('assets/images/Logo-nobg.png') }}"
+                                                        <img src="{{ isset($blog->images) ? asset('blog_images/' . $blog->images) : asset('assets/images/Logo-nobg.png') }}"
                                                             alt="{{ $blog->title }}" class="img-fluid"
                                                             style="width: 100%; height: 200px; object-fit: cover;">
                                                     </div>
@@ -1220,7 +1220,7 @@
                             <a href="{{ route('blogdetail', $blog->slug) }}" class="text-decoration-none">
                                 <div class="overflow-hidden text-white card h-100">
                                     <div class="card-img-top zoom-image"
-                                        style="background: url('{{ asset('public/storage/' . $blog->images ?? 'assets/images/Logo-nobg.png') }}') center/cover no-repeat; height: 200px;">
+                                        style="background: url('{{ asset('blog_images/' . $blog->images ?? 'assets/images/Logo-nobg.png') }}') center/cover no-repeat; height: 200px;">
                                     </div>
                                     <div class="card-body">
                                         <div class="pb-3 text-success">

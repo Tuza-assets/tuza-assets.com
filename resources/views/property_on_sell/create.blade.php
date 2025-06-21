@@ -1,98 +1,94 @@
 @extends('layouts.dashboard.app')
-
 @section('content')
-    @php
-        $zonnings = \App\Models\Zonning::all();
-    @endphp
-    <div class="px-5 py-5 bg-white container-fluid">
-        <div class="row">
-            <div class="p-3 bg-white border rounded shadow-md col-lg-12">
+    <div class="p-4 sm:ml-64">
+        <div class="mt-14 rounded-lg border-gray-200 dark:border-gray-700">
+            @php
+                $zonnings = \App\Models\Zonning::all();
+            @endphp
+            <div class="p-3 bg-white rounded border shadow-md col-lg-12">
                 <div class="container mx-auto">
                     <!-- Step Tracker -->
-                    <div class="flex items-center justify-between mb-6">
+                    <div class="flex justify-between items-center mb-6">
                         <div class="flex items-center space-x-4 w-full">
-                            <div class="step-circle w-10 h-10 rounded-full flex items-center justify-center font-bold"
+                            <div class="flex justify-center items-center w-10 h-10 font-bold rounded-full step-circle"
                                 data-step="1">1</div>
-                            <div class="step-line flex-grow h-1 bg-gray-300"></div>
-                            <div class="step-circle w-10 h-10 rounded-full flex items-center justify-center font-bold"
+                            <div class="flex-grow h-1 bg-gray-300 step-line"></div>
+                            <div class="flex justify-center items-center w-10 h-10 font-bold rounded-full step-circle"
                                 data-step="2">2</div>
-                            <div class="step-line flex-grow h-1 bg-gray-300"></div>
-                            <div class="step-circle w-10 h-10 rounded-full flex items-center justify-center font-bold"
+                            <div class="flex-grow h-1 bg-gray-300 step-line"></div>
+                            <div class="flex justify-center items-center w-10 h-10 font-bold rounded-full step-circle"
                                 data-step="3">3</div>
-                            <div class="step-line flex-grow h-1 bg-gray-300"></div>
-                            <div class="step-circle w-10 h-10 rounded-full flex items-center justify-center font-bold"
+                            <div class="flex-grow h-1 bg-gray-300 step-line"></div>
+                            <div class="flex justify-center items-center w-10 h-10 font-bold rounded-full step-circle"
                                 data-step="4">4</div>
                         </div>
                     </div>
 
                     <!-- Step Labels -->
-                    <div class="flex justify-between text-sm mb-8">
+                    <div class="flex justify-between mb-8 text-sm">
                         <span class="step-label" data-step="1">Property Details</span>
                         <span class="step-label" data-step="2">Location</span>
                         <span class="step-label" data-step="3">Specifications</span>
                         <span class="step-label" data-step="4">Pricing and Amenities</span>
                     </div>
 
-                    <form 
-                        action="{{ isset($property) ? route('admin.properties.update', $property->id) : route('admin.properties.store') }}" 
-                        method="POST" 
-                        class="step-content" 
-                        enctype="multipart/form-data"
-                    >
+                    <form
+                        action="{{ isset($property) ? route('admin.properties.update', $property->id) : route('admin.properties.store') }}"
+                        method="POST" class="step-content" enctype="multipart/form-data">
                         @csrf
-                        @if(isset($property))
+                        @if (isset($property))
                             @method('PUT') {{-- For update operations --}}
                         @endif
-                        
-                      
-                         @include('layouts.form.step1')
+
+
+                        @include('layouts.form.step1')
 
                         <!-- Step 2: Location Details -->
-                        <div class="step hidden" id="step2">
-                            <div class="bg-white  py-6">
-                                <h2 class="text-2xl font-bold mb-4 text-gray-800">Location Details</h2>
+                        <div class="hidden step" id="step2">
+                            <div class="py-6 bg-white">
+                                <h2 class="mb-4 text-2xl font-bold text-gray-800">Location Details</h2>
 
                                 @include('layouts.location.propery_location')
 
                                 <div class="flex justify-between mt-4">
                                     <button type="button"
-                                        class="prev-step btn btn-secondary px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
+                                        class="px-6 py-2 text-gray-700 bg-gray-300 rounded-lg prev-step btn btn-secondary hover:bg-gray-400"
                                         data-step="2">Previous</button>
                                     <button type="button"
-                                        class="next-step btn btn-primary px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-blue-600"
+                                        class="px-6 py-2 text-white bg-orange-500 rounded-lg next-step btn btn-primary hover:bg-blue-600"
                                         data-step="2">Next</button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Step 3: Property Specifications -->
-                        <div class="step hidden" id="step3">
-                            <div class="bg-white  py-6">
-                                <h2 class="text-2xl font-bold mb-4 text-gray-800">Property Specifications</h2>
+                        <div class="hidden step" id="step3">
+                            <div class="py-6 bg-white">
+                                <h2 class="mb-4 text-2xl font-bold text-gray-800">Property Specifications</h2>
                                 @include('layouts.form.step3')
                                 <div class="flex justify-between mt-4">
                                     <button type="button"
-                                        class="prev-step btn btn-secondary px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
+                                        class="px-6 py-2 text-gray-700 bg-gray-300 rounded-lg prev-step btn btn-secondary hover:bg-gray-400"
                                         data-step="3">Previous</button>
                                     <button type="button"
-                                        class="next-step btn btn-primary px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-blue-600"
+                                        class="px-6 py-2 text-white bg-orange-500 rounded-lg next-step btn btn-primary hover:bg-blue-600"
                                         data-step="3">Next</button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Step 4: Pricing and Availability -->
-                        <div class="step hidden" id="step4">
-                            <div class="bg-white  py-6">
-                                <h2 class="text-2xl font-bold mb-4 text-gray-800">Pricing and Amenities</h2>
+                        <div class="hidden step" id="step4">
+                            <div class="py-6 bg-white">
+                                <h2 class="mb-4 text-2xl font-bold text-gray-800">Pricing and Amenities</h2>
                                 @include('layouts.form.step4')
                                 <div class="flex justify-between mt-4">
                                     <button type="button"
-                                        class="prev-step btn btn-secondary px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
+                                        class="px-6 py-2 text-gray-700 bg-gray-300 rounded-lg prev-step btn btn-secondary hover:bg-gray-400"
                                         data-step="4">Previous</button>
-                                            <button type="submit" class="px-6 py-2 bg-green-500 text-white rounded-lg">
-                                                {{ isset($property) ? 'Update Property' : 'Create Property' }}
-                                            </button>
+                                    <button type="submit" class="px-6 py-2 text-white bg-green-500 rounded-lg">
+                                        {{ isset($property) ? 'Update Property' : 'Create Property' }}
+                                    </button>
                                 </div>
                             </div>
                         </div>

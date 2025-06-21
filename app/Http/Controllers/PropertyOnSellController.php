@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PropertyOnSell;
 use App\Models\Favority;
-use Str;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class PropertyOnSellController extends Controller
@@ -16,26 +17,25 @@ class PropertyOnSellController extends Controller
         return view('property_on_sell.index', compact('properties'));
     }
 
-        public function create(Request $request)
-        {
-            $propertyId = $request->input('property_id'); 
-            $property = null;
-        
-            if ($propertyId) {
-                $property = PropertyOnSell::find($propertyId); 
-            }
-            return view('property_on_sell.create', compact('property'));
+    public function create(Request $request)
+    {
+        $propertyId = $request->input('property_id');
+        $property = null;
+
+        if ($propertyId) {
+            $property = PropertyOnSell::find($propertyId);
         }
-        
-           
-   public function store(Request $request)
+        return view('property_on_sell.create', compact('property'));
+    }
+
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'upi' => 'required|string|max:255', 
+            'upi' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'mainimages' => 'nullable|image',
-             'type' => 'nullable|string',
+            'mainimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20480',
+            'type' => 'nullable|string',
             'country' => 'required|string|max:255',
             'province' => 'required|string|max:255',
             'district' => 'required|string|max:255',
@@ -44,7 +44,7 @@ class PropertyOnSellController extends Controller
             'village' => 'required|string|max:255',
             'house' => 'nullable|string|max:255',
             'map_link' => 'nullable|string',
-            'images.*' => 'nullable|image',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20480',
             'size' => 'required|string|max:255',
             'floor' => 'nullable|integer',
             'room' => 'nullable|integer',
@@ -66,51 +66,48 @@ class PropertyOnSellController extends Controller
             'bathroom' => 'nullable|integer',
             'storage' => 'nullable|integer',
             'construction_type' => 'nullable|string',
-            'year_of_construction' => 'nullable',
-            
+            'year_of_construction' => 'nullable|integer|min:1900|max:' . date('Y'),
         ]);
-        
-        
+
+        // Generate unique property code
         $year = date('Y');
         $countThisYear = PropertyOnSell::whereYear('created_at', $year)->count() + 1;
         $serial = str_pad($countThisYear, 3, '0', STR_PAD_LEFT);
         $random = strtoupper(substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 3));
         $identity = "{$year}_{$serial}_{$random}";
-        $validatedData['property_code']=$identity;
-        
-        if ($request->hasFile('mainimages')) {
-            $image = $request->file('mainimages');
+        $validatedData['property_code'] = $identity;
+
+        // Handle main image
+        if ($request->hasFile('mainimage')) {
+            $image = $request->file('mainimage');
             $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
-    
-            $img = $this->applyWatermark($image); 
-            $img->save(public_path('storage/property_images/' . $newImageName));
-    
-            $validatedData['mainimages'] = 'storage/property_images/' . $newImageName;
+            $img = $this->applyWatermark($image);
+
+            // Convert image to string and store using Storage
+            $imageData = $img->encode('jpg', 90)->__toString();
+            Storage::disk('property_images')->put($newImageName, $imageData);
+            $validatedData['mainimage'] = 'property_images/' . $newImageName;
         }
-        
-        // dd($validatedData);
-        
-         if ($request->hasFile('images')) {
-                $imagePaths = [];
-                foreach ($request->file('images') as $image) {
-                    $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
-                    $img = $this->applyWatermark($image);
-                    $img->save(public_path('storage/property_images/' . $newImageName));
-        
-                    $imagePaths[] = 'storage/property_images/' . $newImageName;
-                }
-                $validatedData['images'] = json_encode($imagePaths);
-            } else {
-                // Retain existing images if no new ones are uploaded
-                $validatedData['images'] = $property->images;
+
+        // Handle additional images
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
+                $img = $this->applyWatermark($image);
+
+                // Convert image to string and store using Storage
+                $imageData = $img->encode('jpg', 90)->__toString();
+                Storage::disk('property_images')->put($newImageName, $imageData);
+                $imagePaths[] = 'property_images/' . $newImageName;
             }
-            
+            $validatedData['images'] = json_encode($imagePaths);
+        }
+
         $property = PropertyOnSell::create($validatedData);
-    
-         return redirect()->route('admin.properties.index', $property->id)->with('success', 'Property created successfully.');
+
+        return redirect()->route('admin.properties.index')->with('success', 'Property created successfully.');
     }
-
-
 
     public function show(PropertyOnSell $property)
     {
@@ -119,13 +116,11 @@ class PropertyOnSellController extends Controller
 
     public function edit(PropertyOnSell $property)
     {
-       
         return view('property_on_sell.edit', compact('property'));
     }
 
     public function update(Request $request, PropertyOnSell $property)
     {
-        // dd($request);
         $validatedData = $request->validate([
             'upi' => 'required|string|max:255',
             'name' => 'nullable|string|max:255',
@@ -139,7 +134,7 @@ class PropertyOnSellController extends Controller
             'village' => 'nullable|string|max:255',
             'house' => 'nullable|string|max:255',
             'map_link' => 'nullable|string',
-            'images.*' => 'nullable|image',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'size' => 'nullable|string|max:255',
             'floor' => 'nullable|integer',
             'room' => 'nullable|integer',
@@ -161,37 +156,54 @@ class PropertyOnSellController extends Controller
             'bathroom' => 'nullable|integer',
             'storage' => 'nullable|integer',
             'construction_type' => 'nullable|string|in:Resale,Newly built',
-            'year_of_construction' => 'nullable',
-             'mainimages' => 'nullable|image',
+            'year_of_construction' => 'nullable|integer|min:1900|max:' . date('Y'),
+            'mainimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Fixed typo
         ]);
-        
-                
-        if ($request->hasFile('mainimages')) {
-            $image = $request->file('mainimages');
-            $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
-    
-            $img = $this->applyWatermark($image); 
-            $img->save(public_path('storage/property_images/' . $newImageName));
-    
-            $validatedData['mainimages'] = 'storage/property_images/' . $newImageName;
-        }
-        
- if ($request->hasFile('images')) {
-        $imagePaths = [];
-        foreach ($request->file('images') as $image) {
+
+        // Handle main image
+        if ($request->hasFile('mainimage')) {
+            // Delete old main image if exists
+            if ($property->mainimage && Storage::disk('property_images')->exists(basename($property->mainimage))) {
+                Storage::disk('property_images')->delete(basename($property->mainimage));
+            }
+
+            $image = $request->file('mainimage');
             $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
             $img = $this->applyWatermark($image);
-            $img->save(public_path('storage/property_images/' . $newImageName));
 
-            $imagePaths[] = 'storage/property_images/' . $newImageName;
+            // Convert image to string and store using Storage
+            $imageData = $img->encode('jpg', 90)->__toString();
+            Storage::disk('property_images')->put($newImageName, $imageData);
+            $validatedData['mainimage'] = 'property_images/' . $newImageName;
         }
-        $validatedData['images'] = json_encode($imagePaths);
-    } else {
-        // Retain existing images if no new ones are uploaded
-        $validatedData['images'] = $property->images;
-    }
-    
-    // dd($validatedData);
+
+        // Handle additional images
+        if ($request->hasFile('images')) {
+            // Delete old images if they exist
+            if ($property->images) {
+                $oldImages = json_decode($property->images, true);
+                if (is_array($oldImages)) {
+                    foreach ($oldImages as $oldImage) {
+                        $fileName = basename($oldImage);
+                        if (Storage::disk('property_images')->exists($fileName)) {
+                            Storage::disk('property_images')->delete($fileName);
+                        }
+                    }
+                }
+            }
+
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
+                $img = $this->applyWatermark($image);
+
+                // Convert image to string and store using Storage
+                $imageData = $img->encode('jpg', 90)->__toString();
+                Storage::disk('property_images')->put($newImageName, $imageData);
+                $imagePaths[] = 'property_images/' . $newImageName;
+            }
+            $validatedData['images'] = json_encode($imagePaths);
+        }
 
         $property->update($validatedData);
 
@@ -213,6 +225,7 @@ class PropertyOnSellController extends Controller
         $favority = Favority::where('product_id', $propertyId)
             ->where('email', $email)
             ->first();
+
         if (!$favority) {
             Favority::create([
                 'product_id' => $propertyId,
@@ -220,56 +233,63 @@ class PropertyOnSellController extends Controller
             ]);
         }
 
-
         return redirect()->back()->with('success', 'Property favorited successfully.');
     }
 
-public function destroy($id)
-{
-    // Find the property by ID
-    $property = PropertyOnSell::findOrFail($id);
+    public function destroy($id)
+    {
+        // Find the property by ID
+        $property = PropertyOnSell::findOrFail($id);
 
-    // If there are images associated with the property, delete them from storage
-    if ($property->images) {
-        $images = json_decode($property->images, true);
-        foreach ($images as $image) {
-            if (file_exists(public_path($image))) {
-                unlink(public_path($image));
+        // Delete main image if exists
+        if ($property->mainimage && Storage::disk('property_images')->exists(basename($property->mainimage))) {
+            Storage::disk('property_images')->delete(basename($property->mainimage));
+        }
+
+        // Delete additional images if they exist
+        if ($property->images) {
+            $images = json_decode($property->images, true);
+            if (is_array($images)) {
+                foreach ($images as $image) {
+                    $fileName = basename($image);
+                    if (Storage::disk('property_images')->exists($fileName)) {
+                        Storage::disk('property_images')->delete($fileName);
+                    }
+                }
             }
         }
+
+        // Delete the property from the database
+        $property->delete();
+
+        // Redirect back with a success message
+        return redirect()->route('admin.properties.index')->with('success', 'Property deleted successfully.');
     }
 
-    // Delete the property from the database
-    $property->delete();
+    public function applyWatermark($image)
+    {
+        $img = Image::make($image->getRealPath());
+        $watermarkPath = public_path('images/wotermarkimg.png');
 
-    // Redirect back with a success message
-    return redirect()->route('admin.properties.index')->with('success', 'Property deleted successfully.');
-}
+        // Check if watermark file exists
+        if (!file_exists($watermarkPath)) {
+            return $img; // Return original image if watermark doesn't exist
+        }
 
+        $watermark = Image::make($watermarkPath);
 
+        // Resize watermark if necessary
+        $watermarkSize = min($img->width() * 0.2, $img->height() * 0.2); // 20% of image size
+        $watermark->resize($watermarkSize, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
 
+        // Calculate position for top-right corner
+        $x = $img->width() - $watermark->width() - 20; // 20px padding from right edge
+        $y = 20; // 20px padding from top edge
 
+        $img->insert($watermark, 'top-left', $x, $y);
 
-public function applyWatermark($image)
-{
-    $img = Image::make($image->getRealPath());
-    $watermark = Image::make(public_path('images/wotermarkimg.png'));
-    
-    // Resize watermark if necessary
-    $watermarkSize = min($img->width() * 0.8, $img->height() * 0.5); // 20% of image size
-    $watermark->resize($watermarkSize, $watermarkSize, function ($constraint) {
-        $constraint->aspectRatio();
-    });
-    
-    // Calculate position for top-right corner
-    $x = $img->width() - $watermark->width() - 20; // 20px padding from right edge
-    $y = 20; // 20px padding from top edge
-    
-    $img->insert($watermark, 'top-left', $x, $y);
-    
-    return $img;
-}
-
-
-
+        return $img;
+    }
 }

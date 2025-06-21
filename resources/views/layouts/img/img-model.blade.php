@@ -34,7 +34,7 @@
     .carousel-control-prev,
     .carousel-control-next {
         width: auto !important;
-       
+
     }
 </style>
 
@@ -48,7 +48,7 @@
               <span aria-hidden="true" style="color: white;">&times;</span>
             </button>
             </div>
-            <div class="modal-body px-4" style="padding-bottom: 10px;">
+            <div class="px-4 modal-body" style="padding-bottom: 10px;">
                 <div id="carouselIndicators" class="carousel slide row" data-ride="carousel" style="height: 100%; ">
                     <div class="col-1">
                         <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
@@ -62,7 +62,7 @@
                         <div style="align-items: center; justify-content: center   ">
                             @foreach ($images as $index => $image)
                                 <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                    <img src="{{ asset('public/' . (is_string($image) ? $image : $image['path'])) }}"
+                                    <img src="{{ asset((is_string($image) ? $image : $image['path'])) }}"
                                         alt="{{ $property->name }}">
                                 </div>
                             @endforeach

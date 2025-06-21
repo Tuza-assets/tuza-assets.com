@@ -31,6 +31,7 @@ class CreateNewUser implements CreatesNewUsers
             'district' => ['required', 'string', 'max:255'],
             'sector' => ['required', 'string', 'max:255'],
             'cell' => ['required', 'string', 'max:255'],
+            'other_phone' => ['required', 'string', 'max:255'],
             'village' => ['required', 'string', 'max:255'],
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
@@ -53,6 +54,7 @@ class CreateNewUser implements CreatesNewUsers
             'sector' => $input['sector'],
             'cell' => $input['cell'],
             'village' => $input['village'],
+            'other_phone' => $input['other_phone'],
             'user_role' => 'user',
         ]);
 
