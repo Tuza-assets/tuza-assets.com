@@ -8,6 +8,7 @@ use App\Models\PropertyOnSell;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 class PartnerPropertyController extends Controller
@@ -58,13 +59,18 @@ class PartnerPropertyController extends Controller
 
         $data = $request->all();
         $data['user_id'] = Auth::id();
-        $data['status'] = "Under Offer";
+        $data['status'] = 'Under Offer';
         $year = date('Y');
         $countThisYear = PropertyOnSell::whereYear('created_at', $year)->count() + 1;
         $serial = str_pad($countThisYear, 3, '0', STR_PAD_LEFT);
         $random = strtoupper(substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 3));
         $identity = "{$year}_{$serial}_{$random}";
-        $data['property_code']=$identity;
+        $data['property_code'] = $identity;
+
+        $publicPath = public_path('property_images');
+        if (!File::exists($publicPath)) {
+            File::makeDirectory($publicPath, 0755, true);
+        }
 
         // Handle main image
         if ($request->hasFile('mainimage')) {
@@ -72,9 +78,9 @@ class PartnerPropertyController extends Controller
             $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
             $img = $this->applyWatermark($image);
 
-            // Convert image to string and store using Storage
-            $imageData = $img->encode('jpg', 90)->__toString();
-            Storage::disk('property_images')->put($newImageName, $imageData);
+            // Save image directly to public/property_images folder
+            $imagePath = $publicPath . '/' . $newImageName;
+            $img->save($imagePath, 90);
             $data['mainimage'] = 'property_images/' . $newImageName;
         }
 
@@ -85,9 +91,9 @@ class PartnerPropertyController extends Controller
                 $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
                 $img = $this->applyWatermark($image);
 
-                // Convert image to string and store using Storage
-                $imageData = $img->encode('jpg', 90)->__toString();
-                Storage::disk('property_images')->put($newImageName, $imageData);
+                // Save image directly to public/property_images folder
+                $imagePath = $publicPath . '/' . $newImageName;
+                $img->save($imagePath, 90);
                 $imagePaths[] = 'property_images/' . $newImageName;
             }
             $data['images'] = json_encode($imagePaths);
@@ -95,8 +101,7 @@ class PartnerPropertyController extends Controller
 
         PropertyOnSell::create($data);
 
-        return redirect()->route('partner.properties.index')
-            ->with('success', 'Property created successfully.');
+        return redirect()->route('partner.properties.index')->with('success', 'Property created successfully.');
     }
 
     public function show(PropertyOnSell $property)
@@ -147,20 +152,29 @@ class PartnerPropertyController extends Controller
 
         $data = $request->all();
 
+                // Ensure property_images directory exists in public folder
+        $publicPath = public_path('property_images');
+        if (!File::exists($publicPath)) {
+            File::makeDirectory($publicPath, 0755, true);
+        }
+
         // Handle main image
         if ($request->hasFile('mainimage')) {
             // Delete old main image if exists
-            if ($property->mainimage && Storage::disk('property_images')->exists(basename($property->mainimage))) {
-                Storage::disk('property_images')->delete(basename($property->mainimage));
+            if ($property->mainimage) {
+                $oldImagePath = public_path($property->mainimage);
+                if (File::exists($oldImagePath)) {
+                    File::delete($oldImagePath);
+                }
             }
 
             $image = $request->file('mainimage');
             $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
             $img = $this->applyWatermark($image);
 
-            // Convert image to string and store using Storage
-            $imageData = $img->encode('jpg', 90)->__toString();
-            Storage::disk('property_images')->put($newImageName, $imageData);
+            // Save image directly to public/property_images folder
+            $imagePath = $publicPath . '/' . $newImageName;
+            $img->save($imagePath, 90);
             $data['mainimage'] = 'property_images/' . $newImageName;
         }
 
@@ -169,10 +183,12 @@ class PartnerPropertyController extends Controller
             // Delete old images if they exist
             if ($property->images) {
                 $oldImages = json_decode($property->images, true);
-                foreach ($oldImages as $oldImage) {
-                    $fileName = basename($oldImage);
-                    if (Storage::disk('property_images')->exists($fileName)) {
-                        Storage::disk('property_images')->delete($fileName);
+                if (is_array($oldImages)) {
+                    foreach ($oldImages as $oldImage) {
+                        $oldImagePath = public_path($oldImage);
+                        if (File::exists($oldImagePath)) {
+                            File::delete($oldImagePath);
+                        }
                     }
                 }
             }
@@ -182,9 +198,9 @@ class PartnerPropertyController extends Controller
                 $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
                 $img = $this->applyWatermark($image);
 
-                // Convert image to string and store using Storage
-                $imageData = $img->encode('jpg', 90)->__toString();
-                Storage::disk('property_images')->put($newImageName, $imageData);
+                // Save image directly to public/property_images folder
+                $imagePath = $publicPath . '/' . $newImageName;
+                $img->save($imagePath, 90);
                 $imagePaths[] = 'property_images/' . $newImageName;
             }
             $data['images'] = json_encode($imagePaths);
@@ -192,8 +208,7 @@ class PartnerPropertyController extends Controller
 
         $property->update($data);
 
-        return redirect()->route('partner.properties.index')
-            ->with('success', 'Property updated successfully.');
+        return redirect()->route('partner.properties.index')->with('success', 'Property updated successfully.');
     }
 
     public function destroy(PropertyOnSell $property)
@@ -218,8 +233,7 @@ class PartnerPropertyController extends Controller
 
         $property->delete();
 
-        return redirect()->route('partner.properties.index')
-            ->with('success', 'Property deleted successfully.');
+        return redirect()->route('partner.properties.index')->with('success', 'Property deleted successfully.');
     }
 
     public function applyWatermark($image)
