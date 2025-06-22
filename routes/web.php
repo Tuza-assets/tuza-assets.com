@@ -552,12 +552,12 @@ Route::post('/payment/callback', [PaymentController::class, 'callback'])->name('
 Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
 Route::post('/payment/check-status', [PaymentController::class, 'checkStatus'])->name('payment.check-status');
 
-Route::group(
-    [
-        'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
-    ],
-    function () {
-        // Partner Property Routes
-    },
-);
+// Route::group(
+//     [
+//         'prefix' => LaravelLocalization::setLocale(),
+//         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+//     ],
+//     function () {
+//         // Partner Property Routes
+//     },
+// );
