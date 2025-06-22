@@ -20,14 +20,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->name('v1')->group(function (){
-    
+
     route::get('/zonning', function (){
         $Zonnings = Zonning::all();
         return response()->json(['data'=>$Zonnings, 'table'=>'zonnings',  'message'=>'zonning data'],200);
 
     });
-    
-    
+
+
         route::get('/zonning/{id}', function ($id){
         $zoning = Zonning::firstWhere('id',$id);
         if (!$zoning) {
@@ -35,14 +35,11 @@ Route::prefix('v1')->name('v1')->group(function (){
         }
         return response()->json(['data'=>$zoning, 'table'=>'zonnings', 'message'=>'zonning data'],200);
     });
-    
+
 
   Route::get('/properties', function () {
         $properties = PropertyOnSell::with('zoning')->get();
         return response()->json(['data' => $properties], 200);
     });
-
-
-
-}); 
+});
 
