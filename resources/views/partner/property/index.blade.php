@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.app')
 @section('content')
-    <div class="py-5 mt-5 bg-white container-fluid">
-        <div class="row">
+    <div class="p-4 sm:ml-64">
+        <div class="mt-14 rounded-lg border-gray-200 dark:border-gray-700">
             <div class="container p-3 mx-auto col-md-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">

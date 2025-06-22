@@ -279,7 +279,6 @@ class PropertyOnSellController extends Controller
 
         // Delete the property from the database
         $property->delete();
-
         // Redirect back with a success message
         return redirect()->route('admin.properties.index')->with('success', 'Property deleted successfully.');
     }
@@ -287,23 +286,16 @@ class PropertyOnSellController extends Controller
     public function applyWatermark($image)
     {
         $img = Image::make($image->getRealPath());
-        $watermarkPath = public_path('images/wotermarkimg.png');
-
-        // Check if watermark file exists
-        if (!file_exists($watermarkPath)) {
-            return $img; // Return original image if watermark doesn't exist
-        }
-
-        $watermark = Image::make($watermarkPath);
+        $watermark = Image::make(public_path('images/wotermarkimg.png'));
 
         // Resize watermark if necessary
-        $watermarkSize = min($img->width() * 0.2, $img->height() * 0.2); // 20% of image size
-        $watermark->resize($watermarkSize, null, function ($constraint) {
+        $watermarkSize = min($img->width() * 0.8, $img->height() * 0.5); // 20% of image size
+        $watermark->resize($watermarkSize, $watermarkSize, function ($constraint) {
             $constraint->aspectRatio();
         });
 
         // Calculate position for top-right corner
-        $x = $img->width() - $watermark->width() - 20; // 20px padding from right edge
+        $x = $img->width() - $watermark->width() - 100; // 100px padding from right edge
         $y = 20; // 20px padding from top edge
 
         $img->insert($watermark, 'top-left', $x, $y);

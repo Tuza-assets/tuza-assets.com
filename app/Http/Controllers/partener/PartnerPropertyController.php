@@ -152,7 +152,7 @@ class PartnerPropertyController extends Controller
 
         $data = $request->all();
 
-                // Ensure property_images directory exists in public folder
+        // Ensure property_images directory exists in public folder
         $publicPath = public_path('property_images');
         if (!File::exists($publicPath)) {
             File::makeDirectory($publicPath, 0755, true);
@@ -248,7 +248,7 @@ class PartnerPropertyController extends Controller
         });
 
         // Calculate position for top-right corner
-        $x = $img->width() - $watermark->width() - 20; // 20px padding from right edge
+        $x = $img->width() - $watermark->width() - 100; // 100px padding from right edge
         $y = 20; // 20px padding from top edge
 
         $img->insert($watermark, 'top-left', $x, $y);

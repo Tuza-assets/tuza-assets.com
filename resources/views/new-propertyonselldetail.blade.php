@@ -567,7 +567,7 @@
                 @if (isset($property->user_id) && $property->user)
                     <div>
                         @if (isset($property->user->profile_photo_path) && $property->user->profile_photo_path)
-                            <img src="{{ asset('profile_photos/' . $property->user->profile_photo_path) }}" alt="User Avatar"
+                            <img src="{{ asset($property->user->profile_photo_path) }}" alt="User Avatar"
                                 class="mb-2 bg-white img-fluid">
                         @else
                             <img src="{{ asset('assets/images/avatar-659652_1280.webp') }}" alt="User Avatar"

@@ -1,7 +1,8 @@
-@extends('layouts.dashboard.app')
+@extends('layouts.dashboard.app-payment')
+
 @section('content')
-    <div class="p-4 sm:ml-64">
-        <div class="mt-14 rounded-lg border-gray-200 dark:border-gray-700">
+    <div class="py-5 mt-5 bg-white container-fluid">
+        <div class="row">
             <div class="container p-3 mx-auto">
                 @php
                     use Carbon\Carbon;

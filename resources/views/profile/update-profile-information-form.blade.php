@@ -19,7 +19,7 @@
 
             <!-- Current Profile Photo -->
             <div class="mt-2" x-show="!photoPreview">
-                <img src="{{ Auth::user()->profile_photo_path ? asset('profile_photos/' . Auth::user()->profile_photo_path) : asset('images/default-avatar.png') }}"
+                <img src="{{ Auth::user()->profile_photo_path ? asset(Auth::user()->profile_photo_path) : asset('images/default-avatar.png') }}"
                     alt="{{ Auth::user()->name }}" class="object-cover w-20 h-20 rounded-full">
             </div>
 

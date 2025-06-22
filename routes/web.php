@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\MailchimpController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\partener\PartnerPropertyController;
+use App\Http\Controllers\partener\PartenerDashboardController;
 
 Route::get('link/authenticate/admin/{user}', function (Request $request, $user) {
     if (!$request->hasValidSignature()) {
@@ -116,6 +117,8 @@ Route::get('/', [LeadController::class, 'index'])->name('welcome');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', [AuthController::class, 'index'])->name('dashboard');
+    Route::get('/Commissioner/Payment', [PartenerDashboardController::class, 'index'])->name('commissioner.Payment');
+
     // Profile Information Routes
     Route::put('/user/profile-information', [App\Http\Controllers\profile\ProfileController::class, 'update'])->name('user-profile-information.update');
 

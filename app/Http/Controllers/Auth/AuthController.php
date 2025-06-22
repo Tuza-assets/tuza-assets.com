@@ -21,7 +21,7 @@ class AuthController extends Controller
         } elseif ($user->status == '3') {
             return view('blogger.dashboard');
         } elseif ($user->status == '4') {
-            return view('partner.dashboard');
+            return redirect()->route('commissioner.Payment');
         } else {
             return view('default.dashboard');
         }
