@@ -1,9 +1,39 @@
 @php
-    $properties = \App\Models\PropertyOnSell::whereNotNull('user_id')->get();
+    use Carbon\Carbon;
+    use App\Models\Payment;
+
+    // Get all properties with users
+    $allProperties = \App\Models\PropertyOnSell::whereNotNull('user_id')->get();
+
+    // Filter properties based on active payments
+    $properties = $allProperties->filter(function ($property) {
+        $partner = $property->user_id;
+
+        if (!$partner) {
+            return false;
+        }
+
+        $latestPayment = Payment::where('user_id', $partner)->orderByDesc('created_at')->first();
+
+        $isPaymentValid = false;
+
+        if ($latestPayment && $latestPayment->amount >= 1000) {
+            // Convert payment date to Kigali timezone
+            $paymentDate = Carbon::parse($latestPayment->created_at)->timezone('Africa/Kigali');
+            $now = now()->timezone('Africa/Kigali');
+
+            $daysDiff = $paymentDate->diffInDays($now);
+
+            // Set validity condition
+            $isPaymentValid = $daysDiff < 30;
+        }
+
+        return $isPaymentValid;
+    });
 @endphp
 
 <style>
-    .text-primary{
+    .text-primary {
         color: orangered !important;
     }
 </style>
@@ -18,8 +48,7 @@
                 </a>
                 <p class="mb-5 text-left">
                     Explore a selection of properties available through Tuza Assets, showcasing diverse options
-                    tailored to
-                    your needs.
+                    tailored to your needs.
                 </p>
             </div>
         </div>
@@ -47,38 +76,38 @@
                                 <div class="mb-4 col-3">
                                     <a href="{{ route('new-propertyonselldetail', $property->id) }}"
                                         class="text-decoration-none">
-                                    <div class="border-0 shadow card rounded-4 h-100">
-                                        <div class="position-relative">
-                                            <img src="{{ asset($firstImage) }}" class="card-img-top rounded-top-4"
-                                                style="height: 200px; object-fit: cover;">
-                                        </div>
-                                        <span class="px-4 py-2 shadow-sm badge bg-light text-dark"
-                                            style="font-size: 1rem;">
-                                            {{ strtoupper($property->property_type) }}
-                                        </span>
-
-                                        <div class="text-center card-body">
-                                            <h5 class="mb-1 text-black card-title fw-bold" style="color: #000;">
-                                                {{ $property->name }}</h5>
-                                            <p class="mb-2 text-muted" style="font-size: 0.95rem;">
-                                                <i class="fas fa-map-marker-alt"></i>
-                                                {{ $property->address ?? $property->district . ', ' . $property->sector . ', ' . $property->village}}
-                                            </p>
-                                            <div class="mb-3">
-                                                <span class="fw-bold text-primary" style="font-size: 1.3rem;">
-                                                    {{ $property->currency }}{{ number_format($property->price, 0) }}
-                                                </span>
+                                        <div class="border-0 shadow card rounded-4 h-100">
+                                            <div class="position-relative">
+                                                <img src="{{ asset($firstImage) }}" class="card-img-top rounded-top-4"
+                                                    style="height: 200px; object-fit: cover;">
                                             </div>
-                                            <div class="pt-2 d-flex justify-content-between text-muted border-top"
-                                                style="font-size: 0.95rem;">
-                                                <span>{{ ucfirst($property->type ?? '') }}</span>,
-                                                <span>{{ ucfirst($property->availability ?? '') }}</span>,
-                                                <span><i class="fas fa-ruler-combined"></i>
-                                                    {{ $property->size ?? 'N/A' }} Sqm</span>
-                                            </div>
+                                            <span class="px-4 py-2 shadow-sm badge bg-light text-dark"
+                                                style="font-size: 1rem;">
+                                                {{ strtoupper($property->property_type) }}
+                                            </span>
 
+                                            <div class="text-center card-body">
+                                                <h5 class="mb-1 text-black card-title fw-bold" style="color: #000;">
+                                                    {{ $property->name }}</h5>
+                                                <p class="mb-2 text-muted" style="font-size: 0.95rem;">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    {{ $property->address ?? $property->district . ', ' . $property->sector . ', ' . $property->village }}
+                                                </p>
+                                                <div class="mb-3">
+                                                    <span class="fw-bold text-primary" style="font-size: 1.3rem;">
+                                                        {{ $property->currency }}{{ number_format($property->price, 0) }}
+                                                    </span>
+                                                </div>
+                                                <div class="pt-2 d-flex justify-content-between text-muted border-top"
+                                                    style="font-size: 0.95rem;">
+                                                    <span>{{ ucfirst($property->type ?? '') }}</span>,
+                                                    <span>{{ ucfirst($property->availability ?? '') }}</span>,
+                                                    <span><i class="fas fa-ruler-combined"></i>
+                                                        {{ $property->size ?? 'N/A' }} Sqm</span>
+                                                </div>
+
+                                            </div>
                                         </div>
-                                    </div>
                                     </a>
                                 </div>
                             @endforeach
@@ -90,12 +119,24 @@
         <!-- Swiper for Small Screens -->
         <swiper-container class="green-swiper small-swiper mySwiper">
             @foreach ($properties as $property)
+                @php
+                    // Determine the first image for small screens
+                    $images = is_string($property->images) ? json_decode($property->images, true) : $property->images;
+                    $firstImage = 'assets/images/default-image.jpg'; // Default fallback image
+                    if (is_array($images) && !empty($images)) {
+                        $firstImage = isset($images[0]['path'])
+                            ? $images[0]['path']
+                            : (is_string($images[0])
+                                ? $images[0]
+                                : 'assets/images/default-image.jpg');
+                    }
+                @endphp
                 <swiper-slide>
                     <div class="property-card">
                         <a href="{{ route('new-propertyonselldetail', $property->id) }}" class="text-decoration-none">
                             <div class="overflow-hidden text-white card h-100">
                                 <div class="card-img-top zoom-image"
-                                    style="background: url('{{ asset('public/' . $firstImage) }}') center/cover no-repeat; height: 280px;">
+                                    style="background: url('{{ asset($firstImage) }}') center/cover no-repeat; height: 280px;">
                                 </div>
                                 <div class="card-body">
                                     <div class="pb-3 text-success">

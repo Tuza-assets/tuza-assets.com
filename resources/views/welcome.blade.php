@@ -1014,7 +1014,7 @@
         </section>
     @endif
     @php
-        $properties = \App\Models\PropertyOnSell::all();
+        $properties = \App\Models\PropertyOnSell::whereNull('user_id')->get();
 
     @endphp
 

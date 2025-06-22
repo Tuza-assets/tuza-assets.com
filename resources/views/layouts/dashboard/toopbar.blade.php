@@ -30,7 +30,7 @@
                             class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                             aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             @if ($user->profile_photo_path)
-                                <img src="{{ asset('profile_photos/' . $user->profile_photo_path) }}"
+                                <img src="{{ asset($user->profile_photo_path) }}"
                                     alt="{{ $user->name }}" class="object-cover w-10 h-10 rounded-full">
                             @else
                                 <div
