@@ -198,7 +198,7 @@ Route::group(
 
         Route::get('/diaspora', function () {
             // Fetch the properties data from the API
-            $propertyResponse = Http::get('http://property.tuza-assets.com/api/v1/properties');
+            $propertyResponse = Http::get('https://property.tuza-assets.com/api/v1/properties');
             $properties = $propertyResponse->json();
 
             return view('diaspora.index', compact('properties'));
@@ -276,7 +276,7 @@ Route::group(
 
 
 Route::get('/Api/Property/all', function () {
-    $response = Http::get('http://property.tuza-assets.com/api/v1/properties');
+    $response = Http::get('https://property.tuza-assets.com/api/v1/properties');
 
     // Check if the response was successful
     if ($response->successful()) {
@@ -293,7 +293,7 @@ Route::get('/Api/Property/all', function () {
 
 Route::get('/propert-on-rent/{id}/media', function ($id)
     {
-        $response = Http::get("http://property.tuza-assets.com/api/v1/properties/{$id}");
+        $response = Http::get("https://property.tuza-assets.com/api/v1/properties/{$id}");
         $property = $response->json();
         return view('api-property-v2.media', compact('property'));
     })->name('propertyonsrentmedia');
@@ -303,13 +303,13 @@ Route::get('/propert-on-rent/{id}/media', function ($id)
 
 Route::get('api/property/{id}', function ($id) {
 
-        $response = Http::get("http://property.tuza-assets.com/api/v1/properties/{$id}");
+        $response = Http::get("https://property.tuza-assets.com/api/v1/properties/{$id}");
         $property = $response->json();
 
         // Fetch properties with the same rent
 
         $rent = $property['available_units'][0]['rent'] ?? 0;
-        $sameRentResponse = Http::get('http://property.tuza-assets.com/api/v1/properties', [
+        $sameRentResponse = Http::get('https://property.tuza-assets.com/api/v1/properties', [
             'rent' => $rent
         ]);
         $sameRentProperties = $sameRentResponse->json();

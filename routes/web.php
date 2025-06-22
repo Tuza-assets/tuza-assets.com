@@ -281,7 +281,7 @@ Route::get('/diaspora', function () {
             'connect_timeout' => 10,
             'retry' => 3,
             'retry_delay' => 1000,
-        ])->get('http://property.tuza-assets.com/api/v1/properties');
+        ])->get('https://property.tuza-assets.com/api/v1/properties');
 
         if ($propertyResponse->successful()) {
             $properties = $propertyResponse->json();
@@ -352,7 +352,7 @@ Route::get('/properties/{id}/media', function ($id) {
     return view('new-propertyonsellmedia', compact('property'));
 })->name('new-propertyonselldetailmedia');
 
-Route::get('/Api/Property/all', function () {
+Route::get('/Property/all', function () {
     try {
         $response = Http::withOptions([
             'verify' => false,
@@ -360,7 +360,7 @@ Route::get('/Api/Property/all', function () {
             'connect_timeout' => 10,
             'retry' => 3,
             'retry_delay' => 1000,
-        ])->get('http://property.tuza-assets.com/api/v1/properties');
+        ])->get('https://property.tuza-assets.com/api/v1/properties');
 
         if ($response->successful()) {
             $properties = $response->json();
@@ -384,7 +384,7 @@ Route::get('/propert-on-rent/{id}/media', function ($id) {
             'connect_timeout' => 10,
             'retry' => 3,
             'retry_delay' => 1000,
-        ])->get("http://property.tuza-assets.com/api/v1/properties/{$id}");
+        ])->get("https://property.tuza-assets.com/api/v1/properties/{$id}");
 
         if ($response->successful()) {
             $property = $response->json();
@@ -408,7 +408,7 @@ Route::get('api/property/{id}', function ($id) {
             'connect_timeout' => 10,
             'retry' => 3,
             'retry_delay' => 1000,
-        ])->get("http://property.tuza-assets.com/api/v1/properties/{$id}");
+        ])->get("https://property.tuza-assets.com/api/v1/properties/{$id}");
 
         if ($response->successful()) {
             $property = $response->json();
@@ -421,7 +421,7 @@ Route::get('api/property/{id}', function ($id) {
                 'connect_timeout' => 10,
                 'retry' => 3,
                 'retry_delay' => 1000,
-            ])->get('http://property.tuza-assets.com/api/v1/properties', [
+            ])->get('https://property.tuza-assets.com/api/v1/properties', [
                 'rent' => $rent,
             ]);
 

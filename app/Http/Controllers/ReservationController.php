@@ -45,7 +45,7 @@ class ReservationController extends Controller
         }
 
         // Fetch property data from API
-        $response = Http::get("http://property.tuza-assets.com/api/v1/properties/{$id}");
+        $response = Http::get("https://property.tuza-assets.com/api/v1/properties/{$id}");
 
         if (!$response->successful()) {
             return redirect()->back()->with('error', 'Property not found');
