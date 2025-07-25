@@ -154,7 +154,7 @@
                         target="_blank">{{ __('home.Tenant') }}</a>
                     <a class="dropdown-item" href="https://property.tuza-assets.com/register"
                         target="_blank">{{ __('home.Landlord') }} </a>
-                    <a class="dropdown-item" href="https://bid.afrinnovators.co.rw/register"
+                    <a class="dropdown-item" href="https://bid.tuza-assets.com/register"
                         target="_blank">{{ __('home.Bidding') }}</a>
                     <a class="dropdown-item" href={{ route('partener.terms_and_condition') }}>{{ __('Commissioner') }}</a>
                 </div>

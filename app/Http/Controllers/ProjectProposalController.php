@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\ProjectProposal;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectProposalController extends Controller
 {
@@ -21,30 +23,38 @@ class ProjectProposalController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'images' => 'required', // Example validation for image upload
+            'images' => 'required|image', // Ensures it's a valid image
         ]);
+
+        $imageName = null;
 
         // Handle file upload
         if ($request->hasFile('images')) {
             $image = $request->file('images');
             $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/images', $imageName); // Store the image in storage/app/public/images
+
+            // Store in the 'project_proposals' disk root
+            Storage::disk('project_proposals')->putFileAs('/', $image, $imageName);
         }
 
         // Create project proposal
         ProjectProposal::create([
             'title' => $request->title,
-            'images' => $imageName, // Store the image name or path in the database
+            'images' => $imageName, // Save only the filename
         ]);
 
         return redirect()->route('admin.project.proposal')->with('success', 'Proposal created successfully.');
     }
 
-
     public function destroy(ProjectProposal $proposal)
     {
+        // Delete the image from storage
+        if ($proposal->images) {
+            Storage::disk('project_proposals')->delete($proposal->images);
+        }
+
         $proposal->delete();
-        
+
         return redirect()->route('admin.project.proposal')->with('success', 'Proposal deleted successfully.');
     }
 }

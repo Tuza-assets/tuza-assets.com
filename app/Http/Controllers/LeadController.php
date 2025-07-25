@@ -59,11 +59,11 @@ class LeadController extends Controller
 
             try {
                 // Fetch the plots on bid data from the API
-                // $response = Http::withOptions([
-                //     'verify' => false,
-                //     'timeout' => 30,
-                // ])->get('https://bid.tuza-assets.com/api/v1/plots-on-bid');
-                // $plots = $response->json();
+                $response = Http::withOptions([
+                    'verify' => false,
+                    'timeout' => 30,
+                ])->get('https://bid.tuza-assets.com/api/v1/plots-on-bid');
+                $plots = $response->json();
 
                 // Fetch the properties data from the API
                 $propertyResponse = Http::withOptions([
@@ -73,11 +73,11 @@ class LeadController extends Controller
                 $properties = $propertyResponse->json();
 
                 // Fetch the plots on sell data from the API
-                // $response2 = Http::withOptions([
-                //     'verify' => false,
-                //     'timeout' => 30,
-                // ])->get('https://bid.tuza-assets.com/api/v1/plots-on-sell');
-                // $plots_on_sell = $response2->json();
+                $response2 = Http::withOptions([
+                    'verify' => false,
+                    'timeout' => 30,
+                ])->get('https://bid.tuza-assets.com/api/v1/plots-on-sell');
+                $plots_on_sell = $response2->json();
 
             } catch (\Throwable $th) {
                 // Log the error if needed
@@ -101,7 +101,7 @@ class LeadController extends Controller
 
     public function show($id)
     {
-        $response = Http::get("http://bid.tuza-assets.com/api/v1/plots-on-bid-show/{$id}");
+        $response = Http::get("https://bid.tuza-assets.com/api/v1/plots-on-bid-show/{$id}");
         $plot = $response->json();
         return view('plot.show', ['plot' => $plot]);
     }

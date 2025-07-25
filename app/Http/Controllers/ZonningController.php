@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Zonning;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ZonningController extends Controller
 {
@@ -37,24 +37,12 @@ class ZonningController extends Controller
         $zonning->name = $request->input('name');
         $zonning->description = $request->input('description');
 
-        // Ensure zone_images directory exists in public folder
-        $publicPath = public_path('zone_images');
-        if (!File::exists($publicPath)) {
-            File::makeDirectory($publicPath, 0755, true);
-        }
-
         $imageUrls = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                // Generate unique filename
                 $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-
-                // Move image to public/zone_images folder
-                $image->move($publicPath, $filename);
-
-                // Generate full URL for database storage
-                $fullUrl = url('zone_images/' . $filename);
-                $imageUrls[] = $fullUrl;
+                Storage::disk('zone_images')->putFileAs('/', $image, $filename);
+                $imageUrls[] = asset('zone_images/' . $filename);
             }
         }
 
@@ -84,48 +72,32 @@ class ZonningController extends Controller
 
         $data = $request->only(['name', 'description']);
 
-        // Ensure zone_images directory exists in public folder
-        $publicPath = public_path('zone_images');
-        if (!File::exists($publicPath)) {
-            File::makeDirectory($publicPath, 0755, true);
-        }
-
         if ($request->hasFile('images')) {
             // Delete old images
             if ($Zonning->images) {
                 $oldImageUrls = json_decode($Zonning->images, true);
                 if (is_array($oldImageUrls)) {
-                    foreach ($oldImageUrls as $oldImageUrl) {
-                        // Extract filename from URL
-                        $filename = basename($oldImageUrl);
-                        $fullPath = public_path('zone_images/' . $filename);
-                        if (File::exists($fullPath)) {
-                            File::delete($fullPath);
-                        }
+                    foreach ($oldImageUrls as $url) {
+                        $filename = basename($url);
+                        Storage::disk('zone_images')->delete($filename);
                     }
                 }
             }
 
-            // Store new images
+            // Save new images
             $imageUrls = [];
             foreach ($request->file('images') as $image) {
-                // Generate unique filename
                 $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-
-                // Move image to public/zone_images folder
-                $image->move($publicPath, $filename);
-
-                // Generate full URL for database storage
-                $fullUrl = url('zone_images/' . $filename);
-                $imageUrls[] = $fullUrl;
+                Storage::disk('zone_images')->putFileAs('/', $image, $filename);
+                $imageUrls[] = asset('zone_images/' . $filename);
             }
+
             $data['images'] = json_encode($imageUrls);
         }
 
         $Zonning->update($data);
 
-        return redirect()->route('admin.Zonning')
-            ->with('success', 'Zonning updated successfully.');
+        return redirect()->route('admin.Zonning')->with('success', 'Zonning updated successfully.');
     }
 
     public function destroy(Zonning $Zonning)
@@ -134,19 +106,15 @@ class ZonningController extends Controller
         if ($Zonning->images) {
             $imageUrls = json_decode($Zonning->images, true);
             if (is_array($imageUrls)) {
-                foreach ($imageUrls as $imageUrl) {
-                    // Extract filename from URL
-                    $filename = basename($imageUrl);
-                    $fullPath = public_path('zone_images/' . $filename);
-                    if (File::exists($fullPath)) {
-                        File::delete($fullPath);
-                    }
+                foreach ($imageUrls as $url) {
+                    $filename = basename($url);
+                    Storage::disk('zone_images')->delete($filename);
                 }
             }
         }
 
         $Zonning->delete();
-        return redirect()->route('admin.Zonning')
-            ->with('success', 'Zonning deleted successfully.');
+
+        return redirect()->route('admin.Zonning')->with('success', 'Zonning deleted successfully.');
     }
 }

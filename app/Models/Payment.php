@@ -27,6 +27,7 @@ class Payment extends Model
     protected $casts = [
         'amount' => 'decimal:2',
         'callback_data' => 'array',
+        'details' => 'array',
     ];
 
     // Relationships

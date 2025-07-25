@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Portfolio;
+use Illuminate\Support\Facades\Storage;
 
 class PortfolioController extends Controller
 {
@@ -19,9 +20,6 @@ class PortfolioController extends Controller
         return view('portfolios.create');
     }
 
-
-    
-    
      public function store(Request $request)
     {
         $request->validate([
@@ -29,11 +27,15 @@ class PortfolioController extends Controller
             'image' => 'required', // Example validation for image upload
         ]);
 
+        $imageName = null;
+        // Handle file upload
         // Handle file upload
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/images', $imageName); // Store the image in storage/app/public/images
+
+            // Store in the 'project_proposals' disk root
+            Storage::disk('project_proposals')->putFileAs('/', $image, $imageName);
         }
 
         // Create project proposal
@@ -44,19 +46,10 @@ class PortfolioController extends Controller
 
         return redirect()->route('admin.portfolios.index')->with('success', 'Proposal created successfully.');
     }
-    
-    
-    
-    
-    
 
     public function destroy($id)
     {
         $portfolio = Portfolio::findOrFail($id);
-
-        if ($portfolio->image && file_exists(public_path('images/' . $portfolio->image))) {
-            unlink(public_path('images/' . $portfolio->image));
-        }
 
         $portfolio->delete();
 

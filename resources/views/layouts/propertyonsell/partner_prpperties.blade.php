@@ -44,12 +44,11 @@
             <div class="py-0 my-0 col-1"></div>
             <div class="py-0 my-0 col-10">
                 <a href="https://www.tuza-assets.com/en/property-on-sell">
-                    <h5 class="text-left text-success font-weight-bold">HOUSE FOR SALE</h5>
+                    <h5 class="text-left text-success font-weight-bold">QUICK RENT/BUY DIRECTLY WITH OUR LOCAL AGENTS IN RWANDA</h5>
                 </a>
-                <p class="mb-5 text-left">
-                    Explore a selection of properties available through Tuza Assets, showcasing diverse options
-                    tailored to your needs.
-                </p>
+                {{-- <p class="mb-5 text-left">
+                    QUICK RENT/BUY DIRECTLY WITH OUR LOCAL AGENTS IN RWANDA
+                </p> --}}
             </div>
         </div>
         <div class="px-5">

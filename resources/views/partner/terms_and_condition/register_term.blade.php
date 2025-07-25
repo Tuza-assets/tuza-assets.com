@@ -3,7 +3,7 @@
         <div class="flex overflow-hidden w-full max-w-5xl bg-white rounded-lg shadow-lg">
             <!-- Left Side: Image and Overlay -->
             <div class="flex relative flex-col justify-center items-center p-8 w-1/2 bg-green-800 hidd-left"
-                style="background: linear-gradient(rgba(34, 197, 94, 0.85), rgba(34, 197, 94, 0.85)), url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
+                style="background: linear-gradient(rgba(34, 197, 94, 0.85), rgba(34, 197, 94, 0.85)), url('{{ asset('assets/images/prop5.jpg') }}') center/cover no-repeat;">
                 <div class="z-10 text-center text-white">
                     <h2 class="mb-2 text-3xl font-bold">WELCOME</h2>
                     <p class="text-lg font-semibold">Learn about your account access and policies</p>

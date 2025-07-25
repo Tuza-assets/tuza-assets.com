@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.app')
 @section('content')
     <div class="p-4 sm:ml-64">
-        <div class="mt-14 rounded-lg border-gray-200 dark:border-gray-700 ">
+        <div class="border-gray-200 rounded-lg mt-14 dark:border-gray-700 ">
             <div class="container p-3 mx-auto col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -33,56 +33,73 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                </div>
 
+                                <!-- Property Type Selection -->
+                                <div class="col-md-12">
+                                    <h6 class="mb-3">Property Type</h6>
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label for="property_action" class="form-label">Property</label>
+                                            <select class="form-select @error('property_action') is-invalid @enderror"
+                                                id="property_action" name="type" required
+                                                onchange="togglePropertyFields()">
+                                                <option value="">Select Property Type</option>
+                                                <option value="House For Rent"
+                                                    {{ old('property_action') == 'House For Rent' ? 'selected' : '' }}>House for
+                                                    Rent</option>
+                                                <option value="House For Sale"
+                                                    {{ old('property_action') == 'House For Sale' ? 'selected' : '' }}>House for
+                                                    Sale</option>
+                                                <option value="Plot For Rent"
+                                                    {{ old('property_action') == 'Plot For Rent' ? 'selected' : '' }}>Plot for
+                                                    Rent</option>
+                                                <option value="Plot For Sale"
+                                                    {{ old('property_action') == 'Plot For Sale' ? 'selected' : '' }}>Plot for
+                                                    Sale</option>
+                                            </select>
+                                            @error('property_action')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
 
+                                        <div class="mb-3 col-md-6" id="house_type_container" style="display: none;">
+                                            <label for="house_type" class="form-label">House Type</label>
+                                            <select class="form-select @error('house_type') is-invalid @enderror"
+                                                id="house_type" name="house_type" onchange="toggleHouseSubType()">
+                                                <option value="">Select House Type</option>
+                                                <option value="residential"
+                                                    {{ old('house_type') == 'residential' ? 'selected' : '' }}>Residential
+                                                </option>
+                                                <option value="commercial"
+                                                    {{ old('house_type') == 'commercial' ? 'selected' : '' }}>Commercial
+                                                </option>
+                                            </select>
+                                            @error('house_type')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6" id="house_subtype_container" style="display: none;">
+                                            <label for="house_subtype" class="form-label">House Subtype</label>
+                                            <select class="form-select @error('house_subtype') is-invalid @enderror"
+                                                id="house_subtype" name="house_subtype">
+                                                <option value="">Select Subtype</option>
+                                                <!-- Options will be populated by JavaScript -->
+                                            </select>
+                                            @error('house_subtype')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- Location Information -->
                                 <div class="col-md-12">
                                     <h6 class="mb-3">Location Information</h6>
                                     <div class="row">
-                                        <div class="mb-3 col-md-4">
-                                            <label for="type" class="form-label">Type</label>
-                                            <select class="form-select @error('type') is-invalid @enderror" id="type"
-                                                name="type" required>
-                                                <option value="">Select Type</option>
-                                                <option value="residential"
-                                                    {{ old('type') == 'residential' ? 'selected' : '' }}>Residential
-                                                </option>
-                                                <option value="commercial"
-                                                    {{ old('type') == 'commercial' ? 'selected' : '' }}>Commercial</option>
-                                                <option value="land" {{ old('type') == 'land' ? 'selected' : '' }}>Land
-                                                </option>
-                                            </select>
-                                            @error('type')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3 col-md-4">
-                                            <label for="property_type" class="form-label">Property Type</label>
-                                            <select class="form-select @error('property_type') is-invalid @enderror"
-                                                id="property_type" name="property_type" required>
-                                                <option value="">Select Property Type</option>
-                                                <option value="house"
-                                                    {{ old('property_type') == 'house' ? 'selected' : '' }}>
-                                                    House</option>
-                                                <option value="apartment"
-                                                    {{ old('property_type') == 'apartment' ? 'selected' : '' }}>Apartment
-                                                </option>
-                                                <option value="villa"
-                                                    {{ old('property_type') == 'villa' ? 'selected' : '' }}>
-                                                    Villa</option>
-                                                <option value="office"
-                                                    {{ old('property_type') == 'office' ? 'selected' : '' }}>Office
-                                                </option>
-                                                <option value="shop"
-                                                    {{ old('property_type') == 'shop' ? 'selected' : '' }}>
-                                                    Shop</option>
-                                            </select>
-                                            @error('property_type')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
                                         <div class="mb-3 col-md-4">
                                             <label for="country" class="form-label">Country</label>
                                             <input type="text"
@@ -94,7 +111,6 @@
                                         </div>
                                     </div>
 
-
                                     <div class="row">
                                         <div class="mb-3 col-md-4">
                                             <label for="province_select" class="form-label">Province</label>
@@ -102,7 +118,6 @@
                                                 id="province_select" name="province_id" required>
                                                 <option value="">Select Province</option>
                                             </select>
-                                            <!-- Hidden input to store province name for form submission -->
                                             <input type="hidden" id="province_name" name="province"
                                                 value="{{ old('province') }}">
                                             @error('province')
@@ -110,27 +125,25 @@
                                             @enderror
                                         </div>
 
-                                        <!-- District Dropdown -->
                                         <div class="mb-3 col-md-4">
                                             <label for="district_select" class="form-label">District</label>
                                             <select class="form-select @error('district') is-invalid @enderror"
                                                 id="district_select" name="district_id" required disabled>
                                                 <option value="">Select District</option>
                                             </select>
-                                            <!-- Hidden input to store district name for form submission -->
                                             <input type="hidden" id="district_name" name="district"
                                                 value="{{ old('district') }}">
                                             @error('district')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+
                                         <div class="mb-3 col-md-4">
                                             <label for="sector_select" class="form-label">Sector</label>
                                             <select class="form-select @error('sector') is-invalid @enderror"
                                                 id="sector_select" name="sector_id" required disabled>
                                                 <option value="">Select Sector</option>
                                             </select>
-                                            <!-- Hidden input to store sector name for form submission -->
                                             <input type="hidden" id="sector_name" name="sector"
                                                 value="{{ old('sector') }}">
                                             @error('sector')
@@ -138,6 +151,7 @@
                                             @enderror
                                         </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="mb-3 col-md-4">
                                             <label for="cell_select" class="form-label">Cell</label>
@@ -145,26 +159,26 @@
                                                 id="cell_select" name="cell_id" required disabled>
                                                 <option value="">Select Cell</option>
                                             </select>
-                                            <!-- Hidden input to store cell name for form submission -->
                                             <input type="hidden" id="cell_name" name="cell"
                                                 value="{{ old('cell') }}">
                                             @error('cell')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+
                                         <div class="mb-3 col-md-4">
                                             <label for="village_select" class="form-label">Village</label>
                                             <select class="form-select @error('village') is-invalid @enderror"
                                                 id="village_select" name="village_id" required disabled>
                                                 <option value="">Select Village</option>
                                             </select>
-                                            <!-- Hidden input to store village name for form submission -->
                                             <input type="hidden" id="village_name" name="village"
                                                 value="{{ old('village') }}">
                                             @error('village')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+
                                         <div class="mb-3 col-md-4">
                                             <label for="map_link" class="form-label">Map Link</label>
                                             <input type="text"
@@ -177,15 +191,15 @@
                                     </div>
                                 </div>
 
-                                <!-- Property Details -->
-                                <div class="mt-4 col-md-12">
+                                <!-- Property Details (For Houses) -->
+                                <div class="mt-4 col-md-12" id="house_details" style="display: none;">
                                     <h6 class="mb-3">Property Details</h6>
                                     <div class="row">
                                         <div class="mb-3 col-md-3">
                                             <label for="size" class="form-label">Size (m²)</label>
                                             <input type="number" step="0.01"
                                                 class="form-control @error('size') is-invalid @enderror" id="size"
-                                                name="size" value="{{ old('size') }}" required>
+                                                name="size" value="{{ old('size') }}">
                                             @error('size')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -194,7 +208,7 @@
                                             <label for="floor" class="form-label">Floor</label>
                                             <input type="number"
                                                 class="form-control @error('floor') is-invalid @enderror" id="floor"
-                                                name="floor" value="{{ old('floor') }}" required>
+                                                name="floor" value="{{ old('floor') }}">
                                             @error('floor')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -204,7 +218,7 @@
                                             <label for="room" class="form-label">Total Rooms</label>
                                             <input type="number"
                                                 class="form-control @error('room') is-invalid @enderror" id="room"
-                                                name="room" value="{{ old('room') }}" required>
+                                                name="room" value="{{ old('room') }}">
                                             @error('room')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -213,7 +227,7 @@
                                             <label for="bedrooms" class="form-label">Bedrooms</label>
                                             <input type="number"
                                                 class="form-control @error('bedrooms') is-invalid @enderror"
-                                                id="bedrooms" name="bedrooms" value="{{ old('bedrooms') }}" required>
+                                                id="bedrooms" name="bedrooms" value="{{ old('bedrooms') }}">
                                             @error('bedrooms')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -222,7 +236,7 @@
                                             <label for="bathroom" class="form-label">Bathrooms</label>
                                             <input type="number"
                                                 class="form-control @error('bathroom') is-invalid @enderror"
-                                                id="bathroom" name="bathroom" value="{{ old('bathroom') }}" required>
+                                                id="bathroom" name="bathroom" value="{{ old('bathroom') }}">
                                             @error('bathroom')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -231,7 +245,7 @@
                                             <label for="kitchen" class="form-label">Kitchens</label>
                                             <input type="number"
                                                 class="form-control @error('kitchen') is-invalid @enderror"
-                                                id="kitchen" name="kitchen" value="{{ old('kitchen') }}" required>
+                                                id="kitchen" name="kitchen" value="{{ old('kitchen') }}">
                                             @error('kitchen')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -240,8 +254,7 @@
                                             <label for="dining_room" class="form-label">Dining Rooms</label>
                                             <input type="number"
                                                 class="form-control @error('dining_room') is-invalid @enderror"
-                                                id="dining_room" name="dining_room" value="{{ old('dining_room') }}"
-                                                required>
+                                                id="dining_room" name="dining_room" value="{{ old('dining_room') }}">
                                             @error('dining_room')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -252,12 +265,36 @@
                                             <input type="number"
                                                 class="form-control @error('year_of_construction') is-invalid @enderror"
                                                 id="year_of_construction" name="year_of_construction"
-                                                value="{{ old('year_of_construction') }}" required>
+                                                value="{{ old('year_of_construction') }}">
                                             @error('year_of_construction')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                    </div>
+                                </div>
 
+                                <!-- Plot Details (For Plots) -->
+                                <div class="mt-4 col-md-12" id="plot_details" style="display: none;">
+                                    <h6 class="mb-3">Plot Details</h6>
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label for="plot_size" class="form-label">Dimensions (m²)</label>
+                                            <input type="number" step="0.01"
+                                                class="form-control @error('plot_size') is-invalid @enderror"
+                                                id="plot_size" name="plot_size" value="{{ old('plot_size') }}">
+                                            @error('plot_size')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3 col-md-12">
+                                            <label for="plot_description" class="form-label">Additional
+                                                Information</label>
+                                            <textarea class="form-control @error('plot_description') is-invalid @enderror" id="plot_description"
+                                                name="plot_description" rows="3" placeholder="Additional details about the plot...">{{ old('plot_description') }}</textarea>
+                                            @error('plot_description')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
 
@@ -280,14 +317,11 @@
                                                 id="currency" name="currency" required>
                                                 <option value="">Select Currency</option>
                                                 <option value="RWF" {{ old('currency') == 'RWF' ? 'selected' : '' }}>
-                                                    RWF
-                                                </option>
+                                                    RWF</option>
                                                 <option value="USD" {{ old('currency') == 'USD' ? 'selected' : '' }}>
-                                                    USD
-                                                </option>
+                                                    USD</option>
                                                 <option value="EUR" {{ old('currency') == 'EUR' ? 'selected' : '' }}>
-                                                    EUR
-                                                </option>
+                                                    EUR</option>
                                             </select>
                                             @error('currency')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -304,17 +338,16 @@
                                                 <option value="rented"
                                                     {{ old('availability') == 'rented' ? 'selected' : '' }}>Rented</option>
                                                 <option value="sold"
-                                                    {{ old('availability') == 'sold' ? 'selected' : '' }}>
-                                                    Sold</option>
+                                                    {{ old('availability') == 'sold' ? 'selected' : '' }}>Sold</option>
                                             </select>
                                             @error('availability')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="mb-3 col-md-3">
+                                        <div class="mb-3 col-md-3" id="construction_type_container">
                                             <label for="construction_type" class="form-label">Construction Type</label>
                                             <select class="form-select @error('construction_type') is-invalid @enderror"
-                                                id="construction_type" name="construction_type" required>
+                                                id="construction_type" name="construction_type">
                                                 <option value="">Select Construction Type</option>
                                                 <option value="concrete"
                                                     {{ old('construction_type') == 'concrete' ? 'selected' : '' }}>Concrete
@@ -336,56 +369,57 @@
                                     </div>
                                 </div>
 
-                                <div class="mb-4">
+                                <!-- Amenities (Only for Houses) -->
+                                <div class="mb-4" id="amenities_section" style="display: none;">
                                     <label class="block mb-2 text-sm font-bold text-gray-700">Amenities:</label>
                                     <div
                                         class="grid w-full grid-cols-4 gap-4 py-2 leading-tight text-gray-700 appearance-none focus:outline-none focus:shadow-outline">
                                         <label class="inline-flex items-center">
                                             <input type="checkbox" name="amenities[]" value="central_heating_boiler"
                                                 class="form-checkbox"
-                                                {{ isset($property) && is_array($property->amenities) && in_array('central_heating_boiler', $property->amenities) ? 'checked' : (in_array('central_heating_boiler', old('amenities', [])) ? 'checked' : '') }}>
+                                                {{ in_array('central_heating_boiler', old('amenities', [])) ? 'checked' : '' }}>
                                             <span class="ml-2">Central Heating Boiler</span>
                                         </label>
                                         <label class="inline-flex items-center">
                                             <input type="checkbox" name="amenities[]" value="bathtub"
                                                 class="form-checkbox"
-                                                {{ isset($property) && is_array($property->amenities) && in_array('bathtub', $property->amenities) ? 'checked' : (in_array('bathtub', old('amenities', [])) ? 'checked' : '') }}>
+                                                {{ in_array('bathtub', old('amenities', [])) ? 'checked' : '' }}>
                                             <span class="ml-2">Bathtub</span>
                                         </label>
                                         <label class="inline-flex items-center">
                                             <input type="checkbox" name="amenities[]" value="renewable_energy"
                                                 class="form-checkbox"
-                                                {{ isset($property) && is_array($property->amenities) && in_array('renewable_energy', $property->amenities) ? 'checked' : (in_array('renewable_energy', old('amenities', [])) ? 'checked' : '') }}>
+                                                {{ in_array('renewable_energy', old('amenities', [])) ? 'checked' : '' }}>
                                             <span class="ml-2">Renewable Energy</span>
                                         </label>
                                         <label class="inline-flex items-center">
                                             <input type="checkbox" name="amenities[]" value="fireplace"
                                                 class="form-checkbox"
-                                                {{ isset($property) && is_array($property->amenities) && in_array('fireplace', $property->amenities) ? 'checked' : (in_array('fireplace', old('amenities', [])) ? 'checked' : '') }}>
+                                                {{ in_array('fireplace', old('amenities', [])) ? 'checked' : '' }}>
                                             <span class="ml-2">Fireplace</span>
                                         </label>
                                         <label class="inline-flex items-center">
                                             <input type="checkbox" name="amenities[]" value="swimming_pool"
                                                 class="form-checkbox"
-                                                {{ isset($property) && is_array($property->amenities) && in_array('swimming_pool', $property->amenities) ? 'checked' : (in_array('swimming_pool', old('amenities', [])) ? 'checked' : '') }}>
+                                                {{ in_array('swimming_pool', old('amenities', [])) ? 'checked' : '' }}>
                                             <span class="ml-2">Swimming Pool</span>
                                         </label>
                                         <label class="inline-flex items-center">
                                             <input type="checkbox" name="amenities[]" value="roof_top"
                                                 class="form-checkbox"
-                                                {{ isset($property) && is_array($property->amenities) && in_array('roof_top', $property->amenities) ? 'checked' : (in_array('roof_top', old('amenities', [])) ? 'checked' : '') }}>
+                                                {{ in_array('roof_top', old('amenities', [])) ? 'checked' : '' }}>
                                             <span class="ml-2">Roof Top</span>
                                         </label>
                                         <label class="inline-flex items-center">
                                             <input type="checkbox" name="amenities[]" value="cinema"
                                                 class="form-checkbox"
-                                                {{ isset($property) && is_array($property->amenities) && in_array('cinema', $property->amenities) ? 'checked' : (in_array('cinema', old('amenities', [])) ? 'checked' : '') }}>
+                                                {{ in_array('cinema', old('amenities', [])) ? 'checked' : '' }}>
                                             <span class="ml-2">Cinema</span>
                                         </label>
                                         <label class="inline-flex items-center">
                                             <input type="checkbox" name="amenities[]" value="gym"
                                                 class="form-checkbox"
-                                                {{ isset($property) && is_array($property->amenities) && in_array('gym', $property->amenities) ? 'checked' : (in_array('gym', old('amenities', [])) ? 'checked' : '') }}>
+                                                {{ in_array('gym', old('amenities', [])) ? 'checked' : '' }}>
                                             <span class="ml-2">Gym</span>
                                         </label>
                                     </div>
@@ -408,6 +442,7 @@
                                         <!-- Preview images will be displayed here -->
                                     </div>
                                 </div>
+
                                 <!-- Terms and Conditions for Image Upload -->
                                 <div class="mb-3">
                                     <div class="form-check">
@@ -440,8 +475,8 @@
                                         </small>
                                     </div>
                                 </div>
-
                             </div>
+
                             <div class="mt-4">
                                 <button type="submit" id="submit-btn" class="btn btn-primary" disabled>Create
                                     Property</button>
@@ -453,7 +488,129 @@
             </div>
         </div>
     </div>
-    <!-- JavaScript: Enable/Disable Submit Button -->
+
+    <!-- JavaScript for Conditional Fields -->
+    <script>
+        // House subtypes mapping
+        const houseSubtypes = {
+            residential: [{
+                    value: 'family_house',
+                    text: 'Family House'
+                },
+                {
+                    value: 'apartment',
+                    text: 'Apartment'
+                },
+                {
+                    value: 'villa',
+                    text: 'Villa'
+                }
+            ],
+            commercial: [{
+                    value: 'office',
+                    text: 'Office(s)'
+                },
+                {
+                    value: 'shop',
+                    text: 'Shop(s)'
+                }
+            ]
+        };
+
+        // Toggle property fields based on property action selection
+        function togglePropertyFields() {
+            const propertyAction = document.getElementById('property_action').value;
+            const houseTypeContainer = document.getElementById('house_type_container');
+            const houseSubtypeContainer = document.getElementById('house_subtype_container');
+            const houseDetails = document.getElementById('house_details');
+            const plotDetails = document.getElementById('plot_details');
+            const amenitiesSection = document.getElementById('amenities_section');
+            const constructionTypeContainer = document.getElementById('construction_type_container');
+
+            // Reset all fields
+            houseTypeContainer.style.display = 'none';
+            houseSubtypeContainer.style.display = 'none';
+            houseDetails.style.display = 'none';
+            plotDetails.style.display = 'none';
+            amenitiesSection.style.display = 'none';
+            constructionTypeContainer.style.display = 'block';
+
+            // Clear selections
+            document.getElementById('house_type').value = '';
+            document.getElementById('house_subtype').value = '';
+
+            if (propertyAction === 'House For Rent' || propertyAction === 'House For Sale') {
+                // Show house-related fields
+                houseTypeContainer.style.display = 'block';
+                houseDetails.style.display = 'block';
+                amenitiesSection.style.display = 'block';
+
+                // Make house fields required
+                setRequiredFields(['house_type'], true);
+                setRequiredFields(['plot_size'], false);
+            } else if (propertyAction === 'Plot For Rent' || propertyAction === 'Plot For Sale') {
+                // Show plot-related fields
+                plotDetails.style.display = 'block';
+                constructionTypeContainer.style.display = 'none';
+
+                // Make plot fields required
+                setRequiredFields(['plot_size'], true);
+                setRequiredFields(['house_type'], false);
+            } else {
+                // Clear all requirements when nothing is selected
+                setRequiredFields(['house_type', 'plot_size'], false);
+            }
+        }
+
+        // Toggle house subtypes based on house type selection
+        function toggleHouseSubType() {
+            const houseType = document.getElementById('house_type').value;
+            const houseSubtypeContainer = document.getElementById('house_subtype_container');
+            const houseSubtypeSelect = document.getElementById('house_subtype');
+
+            if (houseType && houseSubtypes[houseType]) {
+                houseSubtypeContainer.style.display = 'block';
+
+                // Clear previous options
+                houseSubtypeSelect.innerHTML = '<option value="">Select Subtype</option>';
+
+                // Add new options
+                houseSubtypes[houseType].forEach(subtype => {
+                    const option = document.createElement('option');
+                    option.value = subtype.value;
+                    option.textContent = subtype.text;
+                    houseSubtypeSelect.appendChild(option);
+                });
+
+                setRequiredFields(['house_subtype'], true);
+            } else {
+                houseSubtypeContainer.style.display = 'none';
+                setRequiredFields(['house_subtype'], false);
+            }
+        }
+
+        // Helper function to set required attribute on fields
+        function setRequiredFields(fieldIds, required) {
+            fieldIds.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    if (required) {
+                        field.setAttribute('required', 'required');
+                    } else {
+                        field.removeAttribute('required');
+                    }
+                }
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            togglePropertyFields();
+            toggleHouseSubType();
+        });
+    </script>
+
+    <!-- Original JavaScript functions -->
     <script>
         function toggleImageUpload() {
             const checkbox = document.getElementById('image_terms');
@@ -461,7 +618,6 @@
             submitBtn.disabled = !checkbox.checked;
         }
 
-        // On page load, run the toggle in case old() has value
         document.addEventListener('DOMContentLoaded', toggleImageUpload);
     </script>
     <script>

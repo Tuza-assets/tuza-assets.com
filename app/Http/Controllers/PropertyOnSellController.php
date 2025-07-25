@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PropertyOnSell;
 use App\Models\Favority;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
@@ -77,37 +78,25 @@ class PropertyOnSellController extends Controller
         $identity = "{$year}_{$serial}_{$random}";
         $validatedData['property_code'] = $identity;
 
-        // Ensure property_images directory exists in public folder
-        $publicPath = public_path('property_images');
-        if (!File::exists($publicPath)) {
-            File::makeDirectory($publicPath, 0755, true);
-        }
-
         // Handle main image
         if ($request->hasFile('mainimage')) {
-            $image = $request->file('mainimage');
-            $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
-            $img = $this->applyWatermark($image);
-
-            // Save image directly to public/property_images folder
-            $imagePath = $publicPath . '/' . $newImageName;
-            $img->save($imagePath, 90);
-            $validatedData['mainimage'] = 'property_images/' . $newImageName;
+            $photo = $request->file('mainimage');
+            $filename = uniqid() . '.' . $photo->getClientOriginalExtension();
+            $image = $this->applyWatermark($photo);
+            Storage::disk('property_images')->put($filename, (string) $image->encode());
+            $validatedData['mainimage'] = 'property_images/' . $filename;
         }
 
         // Handle additional images
         if ($request->hasFile('images')) {
-            $imagePaths = [];
-            foreach ($request->file('images') as $image) {
-                $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
-                $img = $this->applyWatermark($image);
-
-                // Save image directly to public/property_images folder
-                $imagePath = $publicPath . '/' . $newImageName;
-                $img->save($imagePath, 90);
-                $imagePaths[] = 'property_images/' . $newImageName;
+            $images = [];
+            foreach ($request->file('images') as $imageFile) {
+                $filename = uniqid() . '.' . $imageFile->getClientOriginalExtension();
+                $image = $this->applyWatermark($imageFile);
+                Storage::disk('property_images')->put($filename, (string) $image->encode());
+                $images[] = 'property_images/' . $filename;
             }
-            $validatedData['images'] = json_encode($imagePaths);
+            $validatedData['images'] = json_encode($images);
         }
 
         $property = PropertyOnSell::create($validatedData);
@@ -166,58 +155,30 @@ class PropertyOnSellController extends Controller
             'mainimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Ensure property_images directory exists in public folder
-        $publicPath = public_path('property_images');
-        if (!File::exists($publicPath)) {
-            File::makeDirectory($publicPath, 0755, true);
-        }
-
-        // Handle main image
         if ($request->hasFile('mainimage')) {
-            // Delete old main image if exists
             if ($property->mainimage) {
-                $oldImagePath = public_path($property->mainimage);
-                if (File::exists($oldImagePath)) {
-                    File::delete($oldImagePath);
-                }
+                Storage::disk('property_images')->delete(basename($property->mainimage));
             }
-
-            $image = $request->file('mainimage');
-            $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
-            $img = $this->applyWatermark($image);
-
-            // Save image directly to public/property_images folder
-            $imagePath = $publicPath . '/' . $newImageName;
-            $img->save($imagePath, 90);
-            $validatedData['mainimage'] = 'property_images/' . $newImageName;
+            $image = $this->applyWatermark($request->file('mainimage'));
+            $filename = uniqid() . '.' . $request->file('mainimage')->getClientOriginalExtension();
+            Storage::disk('property_images')->put($filename, (string) $image->encode());
+            $validatedData['mainimage'] = 'property_images/' . $filename;
         }
 
-        // Handle additional images
         if ($request->hasFile('images')) {
-            // Delete old images if they exist
             if ($property->images) {
-                $oldImages = json_decode($property->images, true);
-                if (is_array($oldImages)) {
-                    foreach ($oldImages as $oldImage) {
-                        $oldImagePath = public_path($oldImage);
-                        if (File::exists($oldImagePath)) {
-                            File::delete($oldImagePath);
-                        }
-                    }
+                foreach (json_decode($property->images, true) as $img) {
+                    Storage::disk('property_images')->delete(basename($img));
                 }
             }
-
-            $imagePaths = [];
-            foreach ($request->file('images') as $image) {
-                $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
-                $img = $this->applyWatermark($image);
-
-                // Save image directly to public/property_images folder
-                $imagePath = $publicPath . '/' . $newImageName;
-                $img->save($imagePath, 90);
-                $imagePaths[] = 'property_images/' . $newImageName;
+            $images = [];
+            foreach ($request->file('images') as $imgFile) {
+                $filename = uniqid() . '.' . $imgFile->getClientOriginalExtension();
+                $img = $this->applyWatermark($imgFile);
+                Storage::disk('property_images')->put($filename, (string) $img->encode());
+                $images[] = 'property_images/' . $filename;
             }
-            $validatedData['images'] = json_encode($imagePaths);
+            $validatedData['images'] = json_encode($images);
         }
 
         $property->update($validatedData);
@@ -237,9 +198,7 @@ class PropertyOnSellController extends Controller
         $propertyId = $validatedData['property_id'];
 
         // Check if the property has already been favorited by this email
-        $favority = Favority::where('product_id', $propertyId)
-            ->where('email', $email)
-            ->first();
+        $favority = Favority::where('product_id', $propertyId)->where('email', $email)->first();
 
         if (!$favority) {
             Favority::create([
@@ -253,33 +212,19 @@ class PropertyOnSellController extends Controller
 
     public function destroy($id)
     {
-        // Find the property by ID
         $property = PropertyOnSell::findOrFail($id);
 
-        // Delete main image if exists
         if ($property->mainimage) {
-            $mainImagePath = public_path($property->mainimage);
-            if (File::exists($mainImagePath)) {
-                File::delete($mainImagePath);
-            }
+            Storage::disk('property_images')->delete(basename($property->mainimage));
         }
 
-        // Delete additional images if they exist
         if ($property->images) {
-            $images = json_decode($property->images, true);
-            if (is_array($images)) {
-                foreach ($images as $image) {
-                    $imagePath = public_path($image);
-                    if (File::exists($imagePath)) {
-                        File::delete($imagePath);
-                    }
-                }
+            foreach (json_decode($property->images, true) as $img) {
+                Storage::disk('property_images')->delete(basename($img));
             }
         }
 
-        // Delete the property from the database
         $property->delete();
-        // Redirect back with a success message
         return redirect()->route('admin.properties.index')->with('success', 'Property deleted successfully.');
     }
 

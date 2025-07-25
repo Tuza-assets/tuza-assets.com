@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
 {
-    protected $apiUrl = 'https://pay.esicia.com'; // Removed trailing slash
+    protected $apiUrl = 'https://pay.esicia.rw'; // Removed trailing slash
 
     public function process(Request $request)
     {
@@ -56,7 +56,7 @@ class PaymentController extends Controller
             'msisdn' => $phone,
             'details' => $request->details,
             'refid' => $refid,
-            'amount' => (int)$request->amount,
+            'amount' => (int) $request->amount,
             'currency' => $request->currency,
             'email' => $request->email,
             'cname' => $request->cname,
@@ -65,30 +65,30 @@ class PaymentController extends Controller
             'retailerid' => '01',
             'returl' => route('payment.callback'),
             'redirecturl' => route('payment.success'),
-            'bankid' => $bankid
+            'bankid' => $bankid,
         ];
 
         try {
             $json_data = json_encode($payload);
 
-            $ch = curl_init('https://pay.esicia.com');
+            $ch = curl_init('https://pay.esicia.rw');
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
             curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-            curl_setopt($ch, CURLOPT_USERPWD, 'tuza:9Wud4i');
+            curl_setopt($ch, CURLOPT_USERPWD, 'tuza:7Dvy3n');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
             $response = curl_exec($ch);
 
             if (curl_errno($ch)) {
                 throw new \Exception(curl_error($ch));
             }
-
+            // dd($response); // For debugging, remove in production
             $result = json_decode($response, true);
             curl_close($ch);
 
             // Remove dd() for production
-            //  dd($result);
+            // dd($result);
 
             if (isset($result['success']) && $result['success'] == 1) {
                 // Store payment details in session for status checking
@@ -138,7 +138,7 @@ class PaymentController extends Controller
                 Log::info('Payment initiated successfully:', [
                     'refid' => $refid,
                     'tid' => $result['tid'] ?? null,
-                    'status' => $paymentStatus
+                    'status' => $paymentStatus,
                 ]);
 
                 return redirect()->back()->with('success', 'Payment initiated successfully. Please check your phone for the payment status.');
@@ -148,8 +148,9 @@ class PaymentController extends Controller
             Log::error('Payment initiation failed:', $result);
 
             $errorMessage = isset($result['reply']) ? $result['reply'] : 'Payment initiation failed';
-            return back()->with('error', 'Payment initiation failed: ' . $errorMessage)->withInput();
-
+            return back()
+                ->with('error', 'Payment initiation failed: ' . $errorMessage)
+                ->withInput();
         } catch (\Exception $e) {
             Log::error('Payment processing error: ' . $e->getMessage());
             return back()->with('error', 'An error occurred while processing your payment. Please try again.')->withInput();
@@ -171,7 +172,7 @@ class PaymentController extends Controller
         try {
             $payload = [
                 'action' => 'checkstatus',
-                'refid' => $refid
+                'refid' => $refid,
             ];
 
             $json_data = json_encode($payload);
@@ -180,7 +181,7 @@ class PaymentController extends Controller
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
             curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-            curl_setopt($ch, CURLOPT_USERPWD, 'tuza:9Wud4i'); // Keep original credentials
+            curl_setopt($ch, CURLOPT_USERPWD, 'tuza:9Wud4i');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
             $response = curl_exec($ch);
@@ -208,7 +209,7 @@ class PaymentController extends Controller
                         // Update database status
                         Payment::where('reference_id', $refid)->update([
                             'payment_status' => 'completed',
-                            'thirdparty_reference_id' => $result['tid'] ?? null
+                            'thirdparty_reference_id' => $result['tid'] ?? null,
                         ]);
                         break;
                     case '02':
@@ -218,7 +219,7 @@ class PaymentController extends Controller
                         // Update database status
                         Payment::where('reference_id', $refid)->update([
                             'payment_status' => 'failed',
-                            'thirdparty_reference_id' => $result['tid'] ?? null
+                            'thirdparty_reference_id' => $result['tid'] ?? null,
                         ]);
                         break;
                     default:
@@ -232,7 +233,6 @@ class PaymentController extends Controller
             }
 
             return back()->with($statusClass, $statusMessage)->with('status_data', $result);
-
         } catch (\Exception $e) {
             Log::error('Payment status check error: ' . $e->getMessage());
             return back()->with('error', 'Failed to check payment status. Please try again.');
@@ -258,13 +258,13 @@ class PaymentController extends Controller
             'payment_status' => $status == '01' ? 'completed' : 'failed',
             'thirdparty_reference_id' => $tid,
             'callback_data' => json_encode($request->all()),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
 
         return response()->json([
             'tid' => $tid,
             'refid' => $refid,
-            'reply' => 'OK'
+            'reply' => 'OK',
         ]);
     }
 

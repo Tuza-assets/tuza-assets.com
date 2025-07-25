@@ -26,38 +26,42 @@ class PartnerPropertyController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
+
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'type' => 'required|string|in:residential,commercial,land',
-            'property_type' => 'required',
+            'type' => 'required|string',
+            'property_type' => 'nullable|string',
+            'house_type' => 'nullable|string',
             'country' => 'required|string',
             'province' => 'required|string',
             'district' => 'required|string',
             'sector' => 'required|string',
             'cell' => 'required|string',
             'village' => 'required|string',
-            'map_link' => 'nullable|url',
-            'size' => 'required|numeric',
-            'floor' => 'required|integer',
-            'room' => 'required|integer',
-            'bedrooms' => 'required|integer',
-            'bathroom' => 'required|integer',
-            'kitchen' => 'required|integer',
-            'dining_room' => 'required|integer',
-            'year_of_construction' => 'required|integer',
+            'map_link' => 'nullable|string',
+            'size' => 'nullable|numeric',
+            'floor' => 'nullable|integer',
+            'room' => 'nullable|integer',
+            'bedrooms' => 'nullable|integer',
+            'bathroom' => 'nullable|integer',
+            'kitchen' => 'nullable|integer',
+            'dining_room' => 'nullable|integer',
+            'year_of_construction' => 'nullable|integer',
             'price' => 'required|numeric',
             'currency' => 'required|string|in:RWF,USD,EUR',
-            'availability' => 'required|string|in:available,rented,sold',
-            'construction_type' => 'required|string|in:concrete,wood,steel,mixed',
+            'availability' => 'required|string',
+            'construction_type' => 'nullable|string',
             'amenities' => 'nullable|array',
-            'amenities.*' => 'string|in:central_heating_boiler,bathtub,renewable_energy,fireplace,swimming_pool,roof_top,cinema,gym',
+            'amenities.*' => 'nullable|string',
             'mainimage' => 'nullable|image|max:20480',
             'images' => 'nullable|array',
             'images.*' => 'image|max:20480',
         ]);
 
         $data = $request->all();
+        // dd($data);
         $data['user_id'] = Auth::id();
         $data['status'] = 'Under Offer';
         $year = date('Y');
@@ -66,38 +70,28 @@ class PartnerPropertyController extends Controller
         $random = strtoupper(substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 3));
         $identity = "{$year}_{$serial}_{$random}";
         $data['property_code'] = $identity;
-
-        $publicPath = public_path('property_images');
-        if (!File::exists($publicPath)) {
-            File::makeDirectory($publicPath, 0755, true);
-        }
-
         // Handle main image
         if ($request->hasFile('mainimage')) {
-            $image = $request->file('mainimage');
-            $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
-            $img = $this->applyWatermark($image);
-
-            // Save image directly to public/property_images folder
-            $imagePath = $publicPath . '/' . $newImageName;
-            $img->save($imagePath, 90);
-            $data['mainimage'] = 'property_images/' . $newImageName;
+            $photo = $request->file('mainimage');
+            $filename = uniqid() . '.' . $photo->getClientOriginalExtension();
+            $image = $this->applyWatermark($photo);
+            Storage::disk('property_images')->put($filename, (string) $image->encode());
+            $data['mainimage'] = 'property_images/' . $filename;
         }
 
         // Handle additional images
         if ($request->hasFile('images')) {
-            $imagePaths = [];
-            foreach ($request->file('images') as $image) {
-                $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
-                $img = $this->applyWatermark($image);
-
-                // Save image directly to public/property_images folder
-                $imagePath = $publicPath . '/' . $newImageName;
-                $img->save($imagePath, 90);
-                $imagePaths[] = 'property_images/' . $newImageName;
+            $images = [];
+            foreach ($request->file('images') as $imageFile) {
+                $filename = uniqid() . '.' . $imageFile->getClientOriginalExtension();
+                $image = $this->applyWatermark($imageFile);
+                Storage::disk('property_images')->put($filename, (string) $image->encode());
+                $images[] = 'property_images/' . $filename;
             }
-            $data['images'] = json_encode($imagePaths);
+            $data['images'] = json_encode($images);
         }
+
+        // dd($data);
 
         PropertyOnSell::create($data);
 
@@ -122,29 +116,30 @@ class PartnerPropertyController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'type' => 'required|string|in:residential,commercial,land',
-            'property_type' => 'required',
+            'type' => 'required|string',
+            'property_type' => 'nullable|string',
+            'house_type' => 'nullable|string',
             'country' => 'required|string',
             'province' => 'required|string',
             'district' => 'required|string',
             'sector' => 'required|string',
             'cell' => 'required|string',
             'village' => 'required|string',
-            'map_link' => 'nullable|url',
-            'size' => 'required|numeric',
-            'floor' => 'required|integer',
-            'room' => 'required|integer',
-            'bedrooms' => 'required|integer',
-            'bathroom' => 'required|integer',
-            'kitchen' => 'required|integer',
-            'dining_room' => 'required|integer',
-            'year_of_construction' => 'required|integer',
+            'map_link' => 'nullable|string',
+            'size' => 'nullable|numeric',
+            'floor' => 'nullable|integer',
+            'room' => 'nullable|integer',
+            'bedrooms' => 'nullable|integer',
+            'bathroom' => 'nullable|integer',
+            'kitchen' => 'nullable|integer',
+            'dining_room' => 'nullable|integer',
+            'year_of_construction' => 'nullable|integer',
             'price' => 'required|numeric',
             'currency' => 'required|string|in:RWF,USD,EUR',
-            'availability' => 'required|string|in:available,rented,sold',
-            'construction_type' => 'required|string|in:concrete,wood,steel,mixed',
+            'availability' => 'required|string',
+            'construction_type' => 'nullable|string',
             'amenities' => 'nullable|array',
-            'amenities.*' => 'string|in:central_heating_boiler,bathtub,renewable_energy,fireplace,swimming_pool,roof_top,cinema,gym',
+            'amenities.*' => 'nullable|string',
             'mainimage' => 'nullable|image|max:20480',
             'images' => 'nullable|array',
             'images.*' => 'image|max:20480',
@@ -152,58 +147,30 @@ class PartnerPropertyController extends Controller
 
         $data = $request->all();
 
-        // Ensure property_images directory exists in public folder
-        $publicPath = public_path('property_images');
-        if (!File::exists($publicPath)) {
-            File::makeDirectory($publicPath, 0755, true);
-        }
-
-        // Handle main image
         if ($request->hasFile('mainimage')) {
-            // Delete old main image if exists
             if ($property->mainimage) {
-                $oldImagePath = public_path($property->mainimage);
-                if (File::exists($oldImagePath)) {
-                    File::delete($oldImagePath);
-                }
+                Storage::disk('property_images')->delete(basename($property->mainimage));
             }
-
-            $image = $request->file('mainimage');
-            $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
-            $img = $this->applyWatermark($image);
-
-            // Save image directly to public/property_images folder
-            $imagePath = $publicPath . '/' . $newImageName;
-            $img->save($imagePath, 90);
-            $data['mainimage'] = 'property_images/' . $newImageName;
+            $image = $this->applyWatermark($request->file('mainimage'));
+            $filename = uniqid() . '.' . $request->file('mainimage')->getClientOriginalExtension();
+            Storage::disk('property_images')->put($filename, (string) $image->encode());
+            $data['mainimage'] = 'property_images/' . $filename;
         }
 
-        // Handle additional images
         if ($request->hasFile('images')) {
-            // Delete old images if they exist
             if ($property->images) {
-                $oldImages = json_decode($property->images, true);
-                if (is_array($oldImages)) {
-                    foreach ($oldImages as $oldImage) {
-                        $oldImagePath = public_path($oldImage);
-                        if (File::exists($oldImagePath)) {
-                            File::delete($oldImagePath);
-                        }
-                    }
+                foreach (json_decode($property->images, true) as $img) {
+                    Storage::disk('property_images')->delete(basename($img));
                 }
             }
-
-            $imagePaths = [];
-            foreach ($request->file('images') as $image) {
-                $newImageName = uniqid() . '.' . $image->getClientOriginalExtension();
-                $img = $this->applyWatermark($image);
-
-                // Save image directly to public/property_images folder
-                $imagePath = $publicPath . '/' . $newImageName;
-                $img->save($imagePath, 90);
-                $imagePaths[] = 'property_images/' . $newImageName;
+            $images = [];
+            foreach ($request->file('images') as $imgFile) {
+                $filename = uniqid() . '.' . $imgFile->getClientOriginalExtension();
+                $img = $this->applyWatermark($imgFile);
+                Storage::disk('property_images')->put($filename, (string) $img->encode());
+                $images[] = 'property_images/' . $filename;
             }
-            $data['images'] = json_encode($imagePaths);
+            $data['images'] = json_encode($images);
         }
 
         $property->update($data);

@@ -52,6 +52,14 @@ return [
             'throw' => false,
         ],
 
+        'project_proposals' => [
+            'driver' => 'local',
+            'root' => storage_path('app/project_proposals'),
+            'url' => env('APP_URL') . '/storage/project_proposals',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         'designs' => [
             'driver' => 'local',
             'root' => storage_path('app/designs'),
@@ -122,6 +130,7 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
         public_path('blog_images') => storage_path('app/blog_images'),
+        public_path('project_proposals') => storage_path('app/project_proposals'),
         public_path('designs') => storage_path('app/designs'),
         public_path('magazines') => storage_path('app/magazines'),
         public_path('property_images') => storage_path('app/property_images'),

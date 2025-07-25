@@ -9,7 +9,7 @@
                     <div class="mb-4 col-3">
                         <div class="card h-100">
                             @if($portfolio->image)
-                                <img src="{{ asset('public/storage/images/' . $portfolio->image) }}" alt="Portfolio Image" class="card-img-top portfolio-image">
+                                <img src="{{ asset('project_proposals/' .  $portfolio->image) }}" alt="Portfolio Image" class="card-img-top portfolio-image">
                             @endif
                             <div class="card-body">
                                 <form action="{{ route('admin.portfolios.destroy', $portfolio->id) }}" method="POST" style="display:inline;">

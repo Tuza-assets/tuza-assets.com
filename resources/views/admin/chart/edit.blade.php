@@ -1,8 +1,7 @@
 @extends('layouts.dashboard.app')
-
 @section('content')
-    <div class="p-4 bg-white">
-        <div class="p-4 border-2 border-gray-200 border-dashed shadow rounded-lg dark:border-gray-700">
+    <div class="p-4 mt-14 sm:ml-64">
+        <div class="p-4 rounded-lg border-2 border-gray-200 border-dashed shadow dark:border-gray-700">
             <div>
                 <x-validation-errors class="mb-4" />
 
@@ -36,8 +35,8 @@
                     </div>
 
 
-                    <div class="flex items-center justify-end mt-4">
-                        <button class="ms-4 bg-green-700 p-4 py-2 text-white">
+                    <div class="flex justify-end items-center mt-4">
+                        <button class="p-4 py-2 text-white bg-green-700 ms-4">
                             Update
                         </button>
                     </div>

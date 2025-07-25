@@ -134,7 +134,7 @@
     }
 </style>
 
-    <section class="hero text-white text-center py-5">
+    <section class="py-5 text-center text-white hero">
         <div class="container">
             <p class="lead">{{ __('home.investors2') }}</p>
         </div>
@@ -162,7 +162,7 @@
                     $projectProposals = ProjectProposal::orderBy('created_at', 'desc')->take(10)->get();
                 @endphp
                 <h4 style="font-size: 16px; font-weight:bold">{{ __('message.section_title') }}</h4>
-                <div class="card mt-3">
+                <div class="mt-3 card">
                     <div id="propertyCarousel" class="carousel slide" data-ride="carousel">
                         <!-- Indicators -->
                         <ol class="carousel-indicators">
@@ -174,7 +174,7 @@
                         <div class="carousel-inner">
                             @foreach ($projectProposals as $index => $proposal)
                                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                    <img src="{{ asset('public/storage/images/' . $proposal->images) }}" class="d-block w-100 h-full"
+                                    <img src="{{ asset('project_proposals/' . $proposal->images) }}" class="h-full d-block w-100"
                                         alt="Project Proposal Image">
                                     <div class="carousel-caption d-none d-md-block">
                                     </div>
@@ -198,17 +198,17 @@
 </section>
 
     <section>
-        <div class="container  pb-5">
+        <div class="container pb-5">
             <div class="row">
                 <!-- Text Content Column -->
                 <div class="col-md-6">
-                    <div class="accordion " id="accordionExample">
+                    <div class="accordion" id="accordionExample">
                         <h4 style="font-size: 16px; font-weight:bold">{{ __('message.why_invest.section1_title') }}</h4>
 
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h2 class="mb-0">
-                                    <button class="btn btn-link text-left" type="button" data-toggle="collapse"
+                                    <button class="text-left btn btn-link" type="button" data-toggle="collapse"
                                         data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         <span class="toggle-icon">►</span> {{ __('message.why_invest.section_title') }}
                                     </button>
@@ -224,7 +224,7 @@
                         <div class="card">
                             <div class="card-header" id="headingTwo">
                                 <h2 class="mb-0">
-                                    <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                    <button class="text-left btn btn-link btn-block collapsed" type="button"
                                         data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
                                         aria-controls="collapseTwo">
                                         <span class="toggle-icon">►</span> {{ __('message.why_invest.section2_title') }}
@@ -252,7 +252,7 @@
                         <div class="card">
                             <div class="card-header" id="headingThree">
                                 <h2 class="mb-0">
-                                    <button class="btn btn-link  text-left collapsed" type="button"
+                                    <button class="text-left btn btn-link collapsed" type="button"
                                         data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
                                         aria-controls="collapseThree">
                                         <span class="toggle-icon">►</span> {{ __('message.why_invest.section3_title') }}
@@ -283,7 +283,7 @@
                     </div>
                 </div>
                 <!-- Carousel Column -->
-              <div class="col-md-6 mt-6">
+              <div class="mt-6 col-md-6">
                 @php
                     use App\Models\Portfolio;
 
@@ -291,7 +291,7 @@
                     $portfolioImages = Portfolio::orderBy('created_at', 'desc')->take(10)->get();
                 @endphp
                 <h4 style="font-size: 16px; font-weight:bold">{{ __('message.our_portfolio') }}</h4>
-                <div class="card mt-3">
+                <div class="mt-3 card">
                     <div id="portfolioCarousel" class="carousel slide" data-ride="carousel">
                         <!-- Indicators -->
                         <ol class="carousel-indicators">
@@ -326,18 +326,18 @@
             </div>
         </div>
     </section>
-    
+
 @if ($plots)
-    <section class="plot-on-bid py-5">
+    <section class="py-5 plot-on-bid">
         <div class="container">
-            <h5 class="text-left text-success mb-5 font-weight-bold">{{ __('message.plot-on-bid') }}</h5>
+            <h5 class="mb-5 text-left text-success font-weight-bold">{{ __('message.plot-on-bid') }}</h5>
             <div class="row">
                 @foreach ($plots as $plot)
                     <div class="col-md-4">
-                        <div class="card mb-4">
+                        <div class="mb-4 card">
                             <img src="{{ $plot['featured_photo'] }}" class="card-img-top" alt="Plot" style="height: 200px; object-fit: cover; width: 100%;">
-                            <div class="card-body pt-2">
-                                <img src="{{ asset('assets/images/locationicon.png') }}" style="height: 12px" 
+                            <div class="pt-2 card-body">
+                                <img src="{{ asset('assets/images/locationicon.png') }}" style="height: 12px"
                                 alt="For Diplomats">
                                 <h6 class="">    @php
                                     $locationParts = [];
@@ -353,39 +353,39 @@
                                     $location = implode(', ', $locationParts);
                                 @endphp
                                 {{ $location }}</h6>
-                                <p class="m-0 p-0"><strong>UPI:</strong> {{ $plot['upi'] }}</p>
-                                <p class="m-0 p-0"><strong>Starting price:</strong>  {{ Number::currency($plot['max_price'] ?? 0, in:'RWF') }}</p>
-                                <p class="m-0 p-0"><strong>Plot size:</strong> {{ number_format($plot['size']) }} m<sup>2</sup></p>
-                                <p class="m-0 py-0 text-success"><strong>{{ $plot['bidders'] ?? 0 }} BIDDERS</strong></p>
+                                <p class="p-0 m-0"><strong>UPI:</strong> {{ $plot['upi'] }}</p>
+                                <p class="p-0 m-0"><strong>Starting price:</strong>  {{ Number::currency($plot['max_price'] ?? 0, in:'RWF') }}</p>
+                                <p class="p-0 m-0"><strong>Plot size:</strong> {{ number_format($plot['size']) }} m<sup>2</sup></p>
+                                <p class="py-0 m-0 text-success"><strong>{{ $plot['bidders'] ?? 0 }} BIDDERS</strong></p>
                                 @if(isset($plot['is_bidding']['end_date']))
                                     <div class="py-3" x-data="timer('{{ $plot['is_bidding']['end_date'] }}')" x-init="init()">
                                         <!--<div class="py-2">TIME LEFT</div>-->
-                                        <div class="d-flex justify-content-between px-5">
+                                        <div class="px-5 d-flex justify-content-between">
                                             <div class="">
-                                                <div class="badge bg-warning text-dark p-3">
+                                                <div class="p-3 badge bg-warning text-dark">
                                                     <span x-text="time().totalHours" class="text-white">00</span>
-                                            
+
                                                 </div>
                                                   <div class="time-text">Hours</div>
                                             </div>
                                             <div class="">
-                                                <div class="badge bg-warning text-dark p-3">
+                                                <div class="p-3 badge bg-warning text-dark">
                                                     <span x-text="time().minutes" class="text-white">59</span>
-                                                    
+
                                                 </div>
                                                 <div class="time-text">Minutes</div>
                                             </div>
                                             <div class="">
-                                                <div class="badge bg-warning text-dark p-3">
+                                                <div class="p-3 badge bg-warning text-dark">
                                                     <span x-text="time().seconds" class="text-white">28</span>
-                                                    
+
                                                 </div>
                                                 <div class="time-text">Seconds</div>
                                             </div>
                                         </div>
                                     </div>
                                 @endif
-                                <a href="https://bid.tuza-assets.com/plot/{{ $plot['id'] }}" target="__blank" class="btn btn-success mt-3 w-100">
+                                <a href="https://bid.tuza-assets.com/plot/{{ $plot['id'] }}" target="__blank" class="mt-3 btn btn-success w-100">
                                    <div class="d-flex justify-content-between align-items-end">
                                     <div>Bid Now</div>
                                     <div>
@@ -401,18 +401,18 @@
         </div>
     </section>
 @endif
-    
+
      <hr>
         <div class="container py-4">
             <div class="row">
-                
+
                 <div class="col-md-6">
-                    <a href="{{ route('BuyPlot') }}" class="btn btn-success d-flex  align-items-center justify-content-center gap-2">
+                    <a href="{{ route('BuyPlot') }}" class="gap-2 btn btn-success d-flex align-items-center justify-content-center">
                         <span class="px-3"> {{ __('message.See_plot-on-bid') }}</span>
                     </a>
                 </div>
                 <div class="col-md-6">
-                    <a href="{{ route('propertyonsell.all') }}" class="btn btn-success d-flex  align-items-center justify-content-center gap-2">
+                    <a href="{{ route('propertyonsell.all') }}" class="gap-2 btn btn-success d-flex align-items-center justify-content-center">
                         <span class="px-3"> {{ __('message.See_plot-on-sell') }}</span>
                     </a>
                 </div>
@@ -422,7 +422,7 @@
             hr {
         border: 1px solid #fe6900;
         width: 80%;
-       }  
+       }
         h4{
             font-size: 16px;
             font-weight:bold
@@ -496,7 +496,7 @@
             });
         });
     </script>
-    
+
     <script>
     function timer(endDate) {
         return {
@@ -538,10 +538,10 @@
 
 
      <!--@if ($plots)-->
-     <!--   <section class="plot-on-bid py-5">-->
+     <!--   <section class="py-5 plot-on-bid">-->
      <!--       <div class="container">-->
                 <!--@include('layouts.slider.app')-->
-     <!--           <h5 class="text-left  text-success mb-5 font-weight-bold "> {{ __('message.plot-on-bid') }}</h5>-->
+     <!--           <h5 class="mb-5 text-left text-success font-weight-bold"> {{ __('message.plot-on-bid') }}</h5>-->
      <!--           <div class="container">-->
      <!--               <div class="carousel-view">-->
      <!--                   <button id="prev-btn" class="prev-btn">-->

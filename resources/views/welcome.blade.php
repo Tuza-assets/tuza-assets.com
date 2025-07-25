@@ -614,7 +614,7 @@
         </div>
     </section>
 
-    @if ($plots)
+   @if ($plots)
         <section class="recent-rental">
             <div class="row">
                 <div class="col-1"></div>
@@ -658,7 +658,13 @@
                                                 </span>
                                             </div>
 
-                                                <span class="p-0 m-0 fs-5"><strong>UPI:</strong> {{ $plot['upi'] }}</span>
+                                                <span class="p-0 m-0 fs-5"><strong>UPI:</strong>
+                                                    @php
+                                                        $upi = $plot['upi'];
+                                                        $maskedUpi = str_repeat('*', max(0, strlen($upi) - 4)) . substr($upi, -4);
+                                                    @endphp
+                                                    {{ $maskedUpi }}
+                                                </span>
                                                 <span class="p-0 m-0"><strong>Starting price:</strong>
                                                     {{ Number::currency($plot['max_price'] ?? 0, in: 'RWF') }}</span>
                                                 <p class="p-0 m-0"><strong>Plot size:</strong>
@@ -740,7 +746,13 @@
                                         @endphp
                                         {{ $location }}
                                     </h6>
-                                    <p class="p-0 m-0"><strong>UPI:</strong> {{ $plot['upi'] }}</p>
+                                    <p class="p-0 m-0"><strong>UPI:</strong>
+                                        @php
+                                            $upi = $plot['upi'];
+                                            $maskedUpi = str_repeat('*', max(0, strlen($upi) - 4)) . substr($upi, -4);
+                                        @endphp
+                                        {{ $maskedUpi }}
+                                    </p>
                                     <p class="p-0 m-0"><strong>Starting price:</strong>
                                         {{ Number::currency($plot['max_price'] ?? 0, in: 'RWF') }}</p>
                                     <p class="p-0 m-0"><strong>Plot size:</strong>
@@ -878,7 +890,7 @@
         </section>
     @endif
 
-    @if ($plots_on_sell)
+   @if ($plots_on_sell)
         <section class="property-for-sale">
             <div class="row">
                 <div class="col-1"></div>
@@ -927,6 +939,15 @@
                                                         </h6>
                                                     </div>
 
+                                                    @if (isset($property['upi']))
+                                                        <p class="p-0 m-0"><strong>UPI:</strong>
+                                                            @php
+                                                                $upi = $property['upi'];
+                                                                $maskedUpi = str_repeat('*', max(0, strlen($upi) - 4)) . substr($upi, -4);
+                                                            @endphp
+                                                            {{ $maskedUpi }}
+                                                        </p>
+                                                    @endif
                                                     <p class="p-0 m-0"><strong>Price:</strong>
                                                         {{ Number::currency($property['max_price'] ?? 0, in: 'RWF') }}
                                                     </p>
@@ -963,13 +984,13 @@
                     <swiper-slide>
                         <div class="card rental-card">
                             <div class="mb-4 card">
-                                <img src="{{ $property['featured_photo'] }}" class="card-img-top" alt="Property"
-                                    style="min-height: 200px; max-height: 200px; width: 100%;">
+                                <a href="https://bid.tuza-assets.com/plot/{{ $property['id'] }}" target="_blank">
+                                    <img src="{{ $property['featured_photo'] }}" class="card-img-top" alt="Property"
+                                        style="min-height: 200px; max-height: 200px; width: 100%;">
+                                </a>
                                 <div class="px-3 pt-2">
                                     <div class="d-flex">
-                                        <a href="https://bid.tuza-assets.com/plot/{{ $property['id'] }}" target="_blank">
-                                            <img src="{{ asset('assets/images/5.svg') }}" alt="Location Icon">
-                                        </a>
+                                        <img src="{{ asset('assets/images/5.svg') }}" alt="Location Icon">
                                         <h6 class="text-bold">
                                             @php
                                                 $locationParts = [];
@@ -987,6 +1008,15 @@
                                             {{ $location }}
                                         </h6>
                                     </div>
+                                    @if (isset($property['upi']))
+                                        <p class="p-0 m-0"><strong>UPI:</strong>
+                                            @php
+                                                $upi = $property['upi'];
+                                                $maskedUpi = str_repeat('*', max(0, strlen($upi) - 4)) . substr($upi, -4);
+                                            @endphp
+                                            {{ $maskedUpi }}
+                                        </p>
+                                    @endif
                                     <p class="p-0 m-0"><strong>Price:</strong>
                                         {{ Number::currency($property['max_price'] ?? 0, in: 'RWF') }}
                                     </p>
