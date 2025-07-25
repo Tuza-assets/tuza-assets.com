@@ -19,9 +19,10 @@ class PaymentController extends Controller
             'msisdn' => 'required|string',
             'amount' => 'required|numeric|min:100',
             'currency' => 'required|in:RWF,USD',
-            'pmethod' => 'required|in:momo,card',
             'details' => 'required|string|max:500',
         ]);
+
+        // For debugging, remove in production
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -61,7 +62,7 @@ class PaymentController extends Controller
             'email' => $request->email,
             'cname' => $request->cname,
             'cnumber' => $phone,
-            'pmethod' => $request->pmethod,
+            'pmethod' =>'momo',
             'retailerid' => '01',
             'returl' => route('payment.callback'),
             'redirecturl' => route('payment.success'),

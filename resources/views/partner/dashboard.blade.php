@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.app')
 @section('content')
     <div class="p-4 sm:ml-64">
-        <div class="mt-14 rounded-lg border-gray-200 dark:border-gray-700">
+        <div class="border-gray-200 rounded-lg mt-14 dark:border-gray-700">
             <div class="container p-3 mx-auto">
                 @php
                     use Carbon\Carbon;
@@ -13,7 +13,7 @@
 
                     $isPaymentValid = false;
 
-                    if ($latestPayment && $latestPayment->amount >= 1000) {
+                    if ($latestPayment && $latestPayment->amount >= 1050) {
                         // Convert payment date to Kigali timezone
                         $paymentDate = Carbon::parse($latestPayment->created_at)->timezone('Africa/Kigali');
                         $now = now()->timezone('Africa/Kigali');
@@ -81,15 +81,15 @@
                                 <h3 class="mb-4 text-2xl font-bold text-gray-800">Access Required</h3>
                                 <p class="mb-4 text-gray-600">
                                     To have full access to sell through <strong>Tuza Assets Ltd</strong>, you must pay an
-                                    access fee of <strong>Frw 1000</strong> for a 30-day period. The access is renewed by
+                                    access fee of <strong>Frw 1050</strong> for a 30-day period. The access is renewed by
                                     topping up at the end of each period.
                                 </p>
                                 <p class="mb-4 text-gray-600">
                                     <strong>Payment method:</strong> MoMo or Credit/Debit Card.
                                 </p>
                                 <p class="mb-4 text-gray-600">
-                                    Need support? Call <strong>+250 785 519 538</strong> or email
-                                    <strong>partners@tuza-assets.com</strong>.
+                                    Need support? Call <strong>+31 6 86495035</strong> or email
+                                    <strong>info@tuza-assets.com</strong>.
                                 </p>
                             </div>
                             <hr>
@@ -165,14 +165,14 @@
                                                 <label for="amount"
                                                     class="block mb-2 text-sm font-medium text-gray-700">Amount *</label>
                                                 <div class="relative">
-                                                    <input type="number" name="amount" id="amount" value="1000"
-                                                        required min="1000" step="1" readonly
+                                                    <input type="number" name="amount" id="amount" value="1050"
+                                                        required min="1050" step="1" readonly
                                                         class="w-full p-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                                     <span
                                                         class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500">RWF</span>
                                                 </div>
                                             </div>
-                                            <div class="d-none">
+                                            <div class="">
                                                 <label for="currency"
                                                     class="block mb-2 text-sm font-medium text-gray-700">Currency</label>
                                                 <select name="currency" id="currency"
@@ -185,10 +185,10 @@
                                                 <label for="pmethod"
                                                     class="block mb-2 text-sm font-medium text-gray-700">Payment Method
                                                     *</label>
-                                                <select name="pmethod" id="pmethod" required
+                                                <select name="pmethod" id="pmethod" required readonly
                                                     class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                                     <option value="">Select Payment Method</option>
-                                                    <option value="momo">Mobile Money (MTN/Airtel)</option>
+                                                    <option value="momo" selected>Mobile Money (MTN/Airtel)</option>
                                                     <option value="cc">Credit/Debit Card</option>
                                                 </select>
                                             </div>

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ asset('assets/images/fiveicon.jpg') }}" type="image/png">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('TUZA ASSETS') }}</title>
+    <title>TUZA ASSETS</title>
     <!--This page css - Morris CSS -->
     <link href="{{ asset('build/assets/app-CtpER2l3.css') }}" rel="stylesheet" />
     <script src="{{ asset('build/assets/app-C1-XIpUa.js') }}"></script>
